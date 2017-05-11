@@ -8,27 +8,36 @@ import java.util.Random;
 public class Main {
     public static void main(String[] args) {
         CellSetGenerator cellSetGenerator = new LocalCellSetGenerator();
-        CellSet cellSet = cellSetGenerator.generate();
 
-        System.out.println("cellSet = " + cellSet);
+        final CellSet set = new CellSet();
+        cellSetGenerator.generate(new CellSetGeneratedListener() {
+            @Override
+            public void getCellSet(CellSet cellSet) {
+                set.moveFrom(cellSet);
+            }
+        });
+    }
+
+    private interface CellSetGeneratedListener {
+        void getCellSet(CellSet cellSet);
     }
 
     private interface CellSetGenerator {
-        CellSet generate();
+        void generate(CellSetGeneratedListener listener);
     }
 
     private static class LocalCellSetGenerator implements CellSetGenerator {
         @Override
-        public CellSet generate() {
-            CellSet set = new CellSet();
+        public void generate(CellSetGeneratedListener listener) {
+            CellSet cellSet = new CellSet();
 
             for (int r = 0; r < CellSet.ROWS_COUNT; ++r) {
                 for (int c = 0; c < CellSet.COLUMNS_COUNT; ++c) {
-                    set.setCell(r, c, CellType.randomCell());
+                    cellSet.setCell(r, c, CellType.randomCell());
                 }
             }
 
-            return set;
+            listener.getCellSet(cellSet);
         }
     }
 
@@ -42,8 +51,9 @@ public class Main {
             mCells[row][column] = cellType;
         }
 
-        public void setAllCells(CellType[][] cells) {
-            mCells = cells;
+        public void moveFrom(CellSet otherSet) {
+            mCells = otherSet.mCells;
+            otherSet.mCells = new CellType[ROWS_COUNT][COLUMNS_COUNT];
         }
 
         @Override
