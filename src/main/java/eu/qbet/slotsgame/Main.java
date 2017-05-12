@@ -7,25 +7,22 @@ public class Main {
     }
 
     private void execute() {
-        CellSetGenerator cellSetGenerator = new LocalCellSetGenerator();
-
         final CellSet cellSet = new CellSet();
-        cellSetGenerator.generate(new CellSetGenerator.Listener() {
+
+        CellSetGenerator cellSetGenerator = new LocalCellSetGenerator(new CellSetGenerator.Listener() {
             @Override
             public void onGenerated(CellSet generatedCellSet) {
                 cellSet.copyFrom(generatedCellSet);
                 System.out.println(cellSet);
-
-                // proto
-                onLineFound(Payline.LINE12, 3);
-                onLineFound(Payline.LINE24, 2);
             }
 
-            // proto
-            public void onLineFound(Payline payline, int length) {
-                System.out.print(length);
+            @Override
+            public void onLineFound(Payline payline, int length, int payout) {
+                System.out.print(length + " reels, gives: " + payout);
                 System.out.print(payline);
             }
         });
+
+        cellSetGenerator.generate();
     }
 }
