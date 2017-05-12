@@ -11,25 +11,23 @@ class LocalSlotsGame implements SlotsGame {
     private int mTotalPayout = 0;
 
     static {
-        mPayouts.put(new Rule(Slot.WILD, 2), 10);
-        mPayouts.put(new Rule(Slot.WILD, 3), 30);
-        mPayouts.put(new Rule(Slot.WILD, 4), 50);
-        mPayouts.put(new Rule(Slot.WILD, 5), 100);
+        mPayouts.put(new Rule(Slot.WILD, 2), 40);
+        mPayouts.put(new Rule(Slot.WILD, 3), 75);
+        mPayouts.put(new Rule(Slot.WILD, 4), 200);
+        mPayouts.put(new Rule(Slot.WILD, 5), 750);
 
-        mPayouts.put(new Rule(Slot.APPLE, 2), 10);
-        mPayouts.put(new Rule(Slot.APPLE, 3), 20);
+        mPayouts.put(new Rule(Slot.APPLE, 2), 3);
+        mPayouts.put(new Rule(Slot.APPLE, 3), 10);
         mPayouts.put(new Rule(Slot.APPLE, 4), 30);
-        mPayouts.put(new Rule(Slot.APPLE, 5), 50);
+        mPayouts.put(new Rule(Slot.APPLE, 5), 40);
 
-        mPayouts.put(new Rule(Slot.BANANA, 2), 15);
-        mPayouts.put(new Rule(Slot.BANANA, 3), 45);
-        mPayouts.put(new Rule(Slot.BANANA, 4), 75);
-        mPayouts.put(new Rule(Slot.BANANA, 5), 150);
+        mPayouts.put(new Rule(Slot.BANANA, 3), 10);
+        mPayouts.put(new Rule(Slot.BANANA, 4), 10);
+        mPayouts.put(new Rule(Slot.BANANA, 5), 100);
 
-        mPayouts.put(new Rule(Slot.CHERRY, 2), 15);
-        mPayouts.put(new Rule(Slot.CHERRY, 3), 45);
-        mPayouts.put(new Rule(Slot.CHERRY, 4), 75);
-        mPayouts.put(new Rule(Slot.CHERRY, 5), 150);
+        mPayouts.put(new Rule(Slot.CHERRY, 3), 30);
+        mPayouts.put(new Rule(Slot.CHERRY, 4), 100);
+        mPayouts.put(new Rule(Slot.CHERRY, 5), 500);
     }
 
     public LocalSlotsGame(SlotsGame.Listener listener) {

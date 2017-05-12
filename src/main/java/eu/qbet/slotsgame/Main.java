@@ -19,7 +19,7 @@ public class Main {
 
             @Override
             public void onLineFound(Payline payline, int length, int payout) {
-                System.out.print(length + " length, gives: " + payout);
+                System.out.print("length: " + length + ", gives: " + payout);
                 System.out.print(payline);
             }
 
@@ -29,6 +29,6 @@ public class Main {
             }
         });
 
-        slotsGame.spin(100, 3);
+        slotsGame.spin(100, 30);
     }
 }
