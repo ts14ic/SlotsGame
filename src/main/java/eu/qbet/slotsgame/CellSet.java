@@ -12,9 +12,12 @@ class CellSet {
         mCells[row][column] = cellType;
     }
 
-    public void moveFrom(CellSet otherSet) {
-        mCells = otherSet.mCells;
-        otherSet.mCells = new CellType[ROWS_COUNT][COLUMNS_COUNT];
+    public void copyFrom(CellSet otherSet) {
+        mCells = Arrays.copyOf(otherSet.mCells, otherSet.mCells.length);
+    }
+
+    public CellType[][] getCells() {
+        return mCells;
     }
 
     @Override

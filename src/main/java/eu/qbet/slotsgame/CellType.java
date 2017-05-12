@@ -6,8 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 enum CellType {
-    // TODO
-    STUB;
+    APPLE, CHERRY, BANANA;
 
     private static final List<CellType> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
     private static final int SIZE = VALUES.size();

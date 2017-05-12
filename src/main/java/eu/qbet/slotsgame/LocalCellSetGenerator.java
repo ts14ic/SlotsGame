@@ -11,6 +11,6 @@ class LocalCellSetGenerator implements CellSetGenerator {
             }
         }
 
-        listener.getCellSet(cellSet);
+        listener.onGenerated(cellSet);
     }
 }

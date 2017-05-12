@@ -1,7 +1,9 @@
 package eu.qbet.slotsgame;
 
 interface CellSetGenerator {
-    interface Listener { void getCellSet(CellSet cellSet); }
+    interface Listener {
+        void onGenerated(CellSet generatedCellSet);
+    }
 
     void generate(CellSetGenerator.Listener listener);
 }

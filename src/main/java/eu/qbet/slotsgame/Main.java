@@ -9,11 +9,20 @@ public class Main {
     private void execute() {
         CellSetGenerator cellSetGenerator = new LocalCellSetGenerator();
 
-        final CellSet set = new CellSet();
+        final CellSet cellSet = new CellSet();
         cellSetGenerator.generate(new CellSetGenerator.Listener() {
             @Override
-            public void getCellSet(CellSet cellSet) {
-                set.moveFrom(cellSet);
+            public void onGenerated(CellSet generatedCellSet) {
+                cellSet.copyFrom(generatedCellSet);
+                System.out.println(cellSet);
+
+                // proto
+                onLineFound(SlotLine.LINE12, 3);
+            }
+
+            // proto
+            public void onLineFound(SlotLine slotLine, int length) {
+                System.out.println(slotLine);
             }
         });
     }
