@@ -7,32 +7,28 @@ public class Main {
     }
 
     private void execute() {
-        final Cellset cellset = new Cellset();
+        final SlotSet slotSet = new SlotSet();
 
-        CellSetGenerator cellSetGenerator = new LocalCellSetGenerator(new CellSetGenerator.Listener() {
-            private int totalPayout = 0;
-
+        SlotsGame slotsGame = new LocalSlotsGame(new SlotsGame.Listener() {
             @Override
-            public void onGenerated(Cellset generatedCellSet) {
-                cellset.copyFrom(generatedCellSet);
-                totalPayout = 0;
+            public void onGenerated(SlotSet generatedCellSet) {
+                slotSet.copyFrom(generatedCellSet);
 
-                System.out.println(cellset);
+                System.out.println(slotSet);
             }
 
             @Override
             public void onLineFound(Payline payline, int length, int payout) {
-                totalPayout += payout;
                 System.out.print(length + " length, gives: " + payout);
                 System.out.print(payline);
             }
 
             @Override
-            public void onTestEnd() {
+            public void onTestEnd(int totalPayout) {
                 System.out.println("totalPayout: " + totalPayout + "\n");
             }
         });
 
-        cellSetGenerator.generate();
+        slotsGame.spin(100, 3);
     }
 }

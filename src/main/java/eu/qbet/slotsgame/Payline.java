@@ -53,7 +53,7 @@ public enum Payline {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("\n");
-        for (int i = 0; i < Cellset.ROWS_COUNT; ++i) {
+        for (int i = 0; i < SlotSet.ROWS_COUNT; ++i) {
             builder.append("|");
             for (int cell : mReels) {
                 builder.append(cell == i ? "*" : " ");
