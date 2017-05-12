@@ -1,6 +1,7 @@
 package eu.qbet.slotsgame;
 
-public enum SlotLine {
+@SuppressWarnings("unused")
+public enum Payline {
     LINE01(new int[] {1, 1, 1, 1, 1}),
     LINE02(new int[] {0, 0, 0, 0, 0}),
     LINE03(new int[] {2, 2, 2, 2, 2}),
@@ -34,7 +35,7 @@ public enum SlotLine {
 
     private int[] mReels;
 
-    SlotLine(int[] reels) {
+    Payline(int[] reels) {
         mReels = reels;
     }
 

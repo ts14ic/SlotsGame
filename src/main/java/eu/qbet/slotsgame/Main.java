@@ -17,12 +17,14 @@ public class Main {
                 System.out.println(cellSet);
 
                 // proto
-                onLineFound(SlotLine.LINE12, 3);
+                onLineFound(Payline.LINE12, 3);
+                onLineFound(Payline.LINE24, 2);
             }
 
             // proto
-            public void onLineFound(SlotLine slotLine, int length) {
-                System.out.println(slotLine);
+            public void onLineFound(Payline payline, int length) {
+                System.out.print(length);
+                System.out.print(payline);
             }
         });
     }
