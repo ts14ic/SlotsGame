@@ -5,14 +5,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-enum CellType {
-    APPLE, CHERRY, BANANA;
+enum Cell {
+    WILD, APPLE, CHERRY, BANANA;
 
-    private static final List<CellType> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
+    private static final List<Cell> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
     private static final int SIZE = VALUES.size();
     private static final Random RANDOM = new Random();
 
-    public static CellType randomCell() {
+    public static Cell randomCell() {
         return VALUES.get(RANDOM.nextInt(SIZE));
     }
 }

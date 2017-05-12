@@ -7,19 +7,29 @@ public class Main {
     }
 
     private void execute() {
-        final CellSet cellSet = new CellSet();
+        final Cellset cellset = new Cellset();
 
         CellSetGenerator cellSetGenerator = new LocalCellSetGenerator(new CellSetGenerator.Listener() {
+            private int totalPayout = 0;
+
             @Override
-            public void onGenerated(CellSet generatedCellSet) {
-                cellSet.copyFrom(generatedCellSet);
-                System.out.println(cellSet);
+            public void onGenerated(Cellset generatedCellSet) {
+                cellset.copyFrom(generatedCellSet);
+                totalPayout = 0;
+
+                System.out.println(cellset);
             }
 
             @Override
             public void onLineFound(Payline payline, int length, int payout) {
-                System.out.print(length + " reels, gives: " + payout);
+                totalPayout += payout;
+                System.out.print(length + " length, gives: " + payout);
                 System.out.print(payline);
+            }
+
+            @Override
+            public void onTestEnd() {
+                System.out.println("totalPayout: " + totalPayout + "\n");
             }
         });
 
