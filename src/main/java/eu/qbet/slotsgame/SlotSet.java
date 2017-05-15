@@ -8,9 +8,7 @@ public class SlotSet {
     private int mRows;
 
     public SlotSet() {
-        mSlots = new Slot[0][0];
-        mColumns = 0;
-        mRows = 0;
+        this(0, 0);
     }
 
     public SlotSet(int rows, int columns) {
