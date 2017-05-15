@@ -1,5 +1,7 @@
 package eu.qbet.slotsgame;
 
+import eu.qbet.slotsgame.local.LocalSlotsGame;
+
 public class Main {
     public static void main(String[] args) {
         Main app = new Main();

@@ -1,33 +1,38 @@
-package eu.qbet.slotsgame;
+package eu.qbet.slotsgame.local;
+
+import eu.qbet.slotsgame.Payline;
+import eu.qbet.slotsgame.Slot;
+import eu.qbet.slotsgame.SlotSet;
+import eu.qbet.slotsgame.SlotsGame;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-class LocalSlotsGame implements SlotsGame {
+public class LocalSlotsGame implements SlotsGame {
     private final static Map<Rule, Integer> mPayouts = new HashMap<>();
-    private static Rule sDummyRule = new Rule(Slot.WILD, 0);
+    private static Rule sDummyRule = new Rule(new Slot(0), 0);
     private SlotsGame.Listener mListener;
     private int mTotalPayout = 0;
 
     static {
-        mPayouts.put(new Rule(Slot.WILD, 2), 40);
-        mPayouts.put(new Rule(Slot.WILD, 3), 75);
-        mPayouts.put(new Rule(Slot.WILD, 4), 200);
-        mPayouts.put(new Rule(Slot.WILD, 5), 750);
+        mPayouts.put(new Rule(LocalSlots.SLOTS[0], 2), 40);
+        mPayouts.put(new Rule(LocalSlots.SLOTS[0], 3), 75);
+        mPayouts.put(new Rule(LocalSlots.SLOTS[0], 4), 200);
+        mPayouts.put(new Rule(LocalSlots.SLOTS[0], 5), 750);
 
-        mPayouts.put(new Rule(Slot.APPLE, 2), 3);
-        mPayouts.put(new Rule(Slot.APPLE, 3), 10);
-        mPayouts.put(new Rule(Slot.APPLE, 4), 30);
-        mPayouts.put(new Rule(Slot.APPLE, 5), 40);
+        mPayouts.put(new Rule(LocalSlots.SLOTS[1], 2), 3);
+        mPayouts.put(new Rule(LocalSlots.SLOTS[1], 3), 10);
+        mPayouts.put(new Rule(LocalSlots.SLOTS[1], 4), 30);
+        mPayouts.put(new Rule(LocalSlots.SLOTS[1], 5), 40);
 
-        mPayouts.put(new Rule(Slot.BANANA, 3), 10);
-        mPayouts.put(new Rule(Slot.BANANA, 4), 10);
-        mPayouts.put(new Rule(Slot.BANANA, 5), 100);
+        mPayouts.put(new Rule(LocalSlots.SLOTS[2], 3), 10);
+        mPayouts.put(new Rule(LocalSlots.SLOTS[2], 4), 10);
+        mPayouts.put(new Rule(LocalSlots.SLOTS[2], 5), 100);
 
-        mPayouts.put(new Rule(Slot.CHERRY, 3), 30);
-        mPayouts.put(new Rule(Slot.CHERRY, 4), 100);
-        mPayouts.put(new Rule(Slot.CHERRY, 5), 500);
+        mPayouts.put(new Rule(LocalSlots.SLOTS[3], 3), 30);
+        mPayouts.put(new Rule(LocalSlots.SLOTS[3], 4), 100);
+        mPayouts.put(new Rule(LocalSlots.SLOTS[3], 5), 500);
     }
 
     public LocalSlotsGame(SlotsGame.Listener listener) {
@@ -41,7 +46,7 @@ class LocalSlotsGame implements SlotsGame {
 
         for (int r = 0; r < SlotSet.ROWS_COUNT; ++r) {
             for (int c = 0; c < SlotSet.COLUMNS_COUNT; ++c) {
-                slotSet.setCell(r, c, Slot.randomCell());
+                slotSet.setCell(r, c, LocalSlots.getRandomSlot());
             }
         }
 

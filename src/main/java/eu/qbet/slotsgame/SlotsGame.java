@@ -1,6 +1,6 @@
 package eu.qbet.slotsgame;
 
-interface SlotsGame {
+public interface SlotsGame {
     interface Listener {
         void onGenerated(SlotSet generatedSlotSet);
         void onLineFound(Payline payline, int length, int payout);

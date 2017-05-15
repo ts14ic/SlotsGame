@@ -1,18 +1,14 @@
 package eu.qbet.slotsgame;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+public class Slot {
+    private int mId;
 
-enum Slot {
-    WILD, APPLE, CHERRY, BANANA;
+    public Slot(int id) {
+        mId = id;
+    }
 
-    private static final List<Slot> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
-    private static final int SIZE = VALUES.size();
-    private static final Random RANDOM = new Random();
-
-    public static Slot randomCell() {
-        return VALUES.get(RANDOM.nextInt(SIZE));
+    @Override
+    public String toString() {
+        return "[" + mId + "]";
     }
 }

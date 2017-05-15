@@ -2,7 +2,7 @@ package eu.qbet.slotsgame;
 
 import java.util.Arrays;
 
-class SlotSet {
+public class SlotSet {
     public static final int ROWS_COUNT = 3;
     public static final int COLUMNS_COUNT = 5;
 
