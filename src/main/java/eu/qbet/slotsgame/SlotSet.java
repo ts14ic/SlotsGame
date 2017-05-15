@@ -3,10 +3,21 @@ package eu.qbet.slotsgame;
 import java.util.Arrays;
 
 public class SlotSet {
-    public static final int ROWS_COUNT = 3;
-    public static final int COLUMNS_COUNT = 5;
+    private Slot mSlots[][];
+    private int mColumns;
+    private int mRows;
 
-    private Slot mSlots[][] = new Slot[ROWS_COUNT][COLUMNS_COUNT];
+    public SlotSet() {
+        mSlots = new Slot[0][0];
+        mColumns = 0;
+        mRows = 0;
+    }
+
+    public SlotSet(int rows, int columns) {
+        mSlots = new Slot[rows][columns];
+        mRows = rows;
+        mColumns = columns;
+    }
 
     public void setCell(int row, int column, Slot slot) {
         mSlots[row][column] = slot;
@@ -14,10 +25,20 @@ public class SlotSet {
 
     public void copyFrom(SlotSet otherSet) {
         mSlots = Arrays.copyOf(otherSet.mSlots, otherSet.mSlots.length);
+        mColumns = otherSet.mColumns;
+        mRows = otherSet.mRows;
     }
 
     public Slot[][] getCells() {
         return mSlots;
+    }
+
+    public int getColumns() {
+        return mColumns;
+    }
+
+    public int getRows() {
+        return mRows;
     }
 
     @Override

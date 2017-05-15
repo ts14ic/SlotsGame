@@ -24,13 +24,11 @@ public class Payline {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("\n");
-        for (int i = 0; i < SlotSet.ROWS_COUNT; ++i) {
-            builder.append("|");
-            for (int cell : mReels) {
-                builder.append(cell == i ? "*" : " ");
-            }
-            builder.append("|\n");
+        builder.append("|");
+        for (int cell : mReels) {
+            builder.append(cell);
         }
+        builder.append("|\n");
         return builder.toString();
     }
 }

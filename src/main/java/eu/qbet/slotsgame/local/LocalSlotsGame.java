@@ -10,8 +10,11 @@ import java.util.Map;
 import java.util.Objects;
 
 public class LocalSlotsGame implements SlotsGame {
-    private final static Map<Rule, Integer> mPayouts = new HashMap<>();
+    private static final Map<Rule, Integer> mPayouts = new HashMap<>();
+    public static final int ROWS_COUNT = 3;
+    public static final int COLUMNS_COUNT = 5;
     private static Rule sDummyRule = new Rule(new Slot(0), 0);
+
     private SlotsGame.Listener mListener;
     private int mTotalPayout = 0;
 
@@ -42,10 +45,10 @@ public class LocalSlotsGame implements SlotsGame {
     @Override
     public void spin(int bet, int lines) {
         mTotalPayout = 0;
-        SlotSet slotSet = new SlotSet();
+        SlotSet slotSet = new SlotSet(ROWS_COUNT, COLUMNS_COUNT);
 
-        for (int r = 0; r < SlotSet.ROWS_COUNT; ++r) {
-            for (int c = 0; c < SlotSet.COLUMNS_COUNT; ++c) {
+        for (int r = 0; r < slotSet.getRows(); ++r) {
+            for (int c = 0; c < slotSet.getColumns(); ++c) {
                 slotSet.setCell(r, c, LocalSlots.getRandomSlot());
             }
         }
