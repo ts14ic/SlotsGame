@@ -56,10 +56,10 @@ class LocalSlotsGame implements SlotsGame {
         Slot[][] slots = set.getCells();
 
         lines = Math.max(lines, 1);
-        lines = Math.min(lines, Payline.values().length);
+        lines = Math.min(lines, LocalPaylines.LINES.length);
 
         for (int i = 0; i < lines; ++i) {
-            testPayline(Payline.values()[i], slots, bet);
+            testPayline(LocalPaylines.LINES[i], slots, bet);
         }
     }
 
