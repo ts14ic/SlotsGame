@@ -1,6 +1,9 @@
 package eu.qbet.slotsgame;
 
-import eu.qbet.slotsgame.local.LocalSlotsGame;
+import eu.qbet.slotsgame.slots.Payline;
+import eu.qbet.slotsgame.slots.SlotSet;
+import eu.qbet.slotsgame.slots.SlotsGame;
+import eu.qbet.slotsgame.slots.local.LocalSlotsGame;
 
 import java.util.List;
 

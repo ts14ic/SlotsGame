@@ -1,4 +1,4 @@
-package eu.qbet.slotsgame;
+package eu.qbet.slotsgame.slots;
 
 public class Slot {
     private int mId;

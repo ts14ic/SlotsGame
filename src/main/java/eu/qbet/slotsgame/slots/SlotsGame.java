@@ -1,4 +1,4 @@
-package eu.qbet.slotsgame;
+package eu.qbet.slotsgame.slots;
 
 import java.util.List;
 
