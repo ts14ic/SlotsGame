@@ -5,16 +5,15 @@ import eu.qbet.slotsgame.Slot;
 import eu.qbet.slotsgame.SlotSet;
 import eu.qbet.slotsgame.SlotsGame;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class LocalSlotsGame implements SlotsGame {
-    private static final Map<Rule, Integer> mPayouts = new HashMap<>();
     public static final int ROWS_COUNT = 3;
     public static final int COLUMNS_COUNT = 5;
+    private static final Map<Rule, Integer> mPayouts = new HashMap<>();
     private static Rule sDummyRule = new Rule(new Slot(0), 0);
 
+    private List<Payline> mPaylines = new ArrayList<>();
     private SlotsGame.Listener mListener;
     private int mTotalPayout = 0;
 
@@ -57,7 +56,7 @@ public class LocalSlotsGame implements SlotsGame {
 
         testCellset(slotSet, bet, lines);
 
-        mListener.onTestEnd(mTotalPayout);
+        mListener.onTestEnd(mPaylines, mTotalPayout);
     }
 
     private void testCellset(SlotSet set, int bet, int lines) {
@@ -65,6 +64,8 @@ public class LocalSlotsGame implements SlotsGame {
 
         lines = Math.max(lines, 1);
         lines = Math.min(lines, LocalPaylines.LINES.length);
+
+        mPaylines.clear();
 
         for (int i = 0; i < lines; ++i) {
             testPayline(LocalPaylines.LINES[i], slots, bet);
@@ -89,6 +90,7 @@ public class LocalSlotsGame implements SlotsGame {
         if (mPayouts.containsKey(sDummyRule)) {
             int payout = mPayouts.get(sDummyRule) * bet;
             mTotalPayout += payout;
+            mPaylines.add(payline);
             mListener.onLineFound(payline, length, payout);
         }
     }

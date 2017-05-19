@@ -2,6 +2,8 @@ package eu.qbet.slotsgame;
 
 import eu.qbet.slotsgame.local.LocalSlotsGame;
 
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         Main app = new Main();
@@ -20,13 +22,11 @@ public class Main {
             }
 
             @Override
-            public void onLineFound(Payline payline, int length, int payout) {
-                System.out.print("length: " + length + ", gives: " + payout);
-                System.out.print(payline);
-            }
+            public void onLineFound(Payline payline, int length, int payout) {}
 
             @Override
-            public void onTestEnd(int totalPayout) {
+            public void onTestEnd(List<Payline> paylines, int totalPayout) {
+                System.out.println(paylines);
                 System.out.println("totalPayout: " + totalPayout + "\n");
             }
         });
