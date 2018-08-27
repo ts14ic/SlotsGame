@@ -7,8 +7,6 @@ import md.ts14ic.slotsgame.slots.local.LocalSetting;
 public class Main {
     public static void main(String[] args) {
         SlotsGame slotsGame = new SlotsGameImpl(
-                3,
-                5,
                 new LocalSetting(),
                 (betPerLine, linesBetOnCount, spinLayout, testResult) -> {
                     System.out.println(spinLayout);

@@ -18,4 +18,14 @@ public class LocalSetting implements SlotsGame.Setting {
     public TestResult testSpinLayout(SpinLayout result, int betPerLine, int betOnLinesCount) {
         return localSpinLayoutTester.test(result, betPerLine, betOnLinesCount);
     }
+
+    @Override
+    public int getRowCount() {
+        return 3;
+    }
+
+    @Override
+    public int getColumnCount() {
+        return 5;
+    }
 }
