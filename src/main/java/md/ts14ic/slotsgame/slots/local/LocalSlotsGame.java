@@ -10,12 +10,19 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 
 public class LocalSlotsGame implements SlotsGame {
-    private static final int ROW_COUNT = 3;
-    private static final int COLUMN_COUNT = 5;
+    private final int rowCount;
+    private final int columnCount;
     private final SpinResultTester spinResultTester;
     private final SlotsGame.Listener listener;
 
-    public LocalSlotsGame(SlotsGame.Listener listener, SpinResultTester spinResultTester) {
+    public LocalSlotsGame(
+            int rowCount,
+            int columnCount,
+            Listener listener,
+            SpinResultTester spinResultTester
+    ) {
+        this.rowCount = rowCount;
+        this.columnCount = columnCount;
         this.listener = requireNonNull(listener);
         this.spinResultTester = requireNonNull(spinResultTester);
     }
@@ -44,8 +51,8 @@ public class LocalSlotsGame implements SlotsGame {
 
     private SpinResult randomSpinResult() {
         return SpinResult.fromGenerator(
-                ROW_COUNT,
-                COLUMN_COUNT,
+                rowCount,
+                columnCount,
                 (rowIndex, columnIndex) -> LocalSlots.getRandomSlot()
         );
     }
