@@ -9,55 +9,8 @@ import java.util.*;
 
 import static java.util.Objects.requireNonNull;
 
-class SpinResultTester {
+public class LocalSpinResultTester {
     private static final Map<Rule, Integer> RULE_TO_PAYOUT = initRuleToPayout();
-    private final int betPerLine;
-    private final int betOnLinesCount;
-
-    private final List<FoundLine> foundLines;
-
-    SpinResultTester(
-            SpinResult spinResult,
-            int betPerLine,
-            int betOnLinesCount
-    ) {
-        this.betPerLine = betPerLine;
-        this.betOnLinesCount = clamp(betOnLinesCount, 1, LocalPaylines.LINES.length);
-        this.foundLines = new ArrayList<>();
-
-        test(spinResult);
-    }
-
-    private static int clamp(int value, int min, int max) {
-        return Math.min(Math.max(value, min), max);
-    }
-
-    private void test(SpinResult result) {
-        foundLines.clear();
-        for (int i = 0; i < betOnLinesCount; ++i) {
-            testPayline(LocalPaylines.LINES[i], result.getCells(), betPerLine);
-        }
-    }
-
-    private void testPayline(Payline payline, List<List<Slot>> slots, int bet) {
-        Slot startingSlot = slots.get(payline.cell(0)).get(0);
-        int length = 1;
-
-        for (int i = 1; i < payline.length(); ++i) {
-            if (slots.get(payline.cell(i)).get(i) == startingSlot) {
-                ++length;
-            } else {
-                break;
-            }
-        }
-
-        Rule rule = new Rule(startingSlot, length);
-
-        if (RULE_TO_PAYOUT.containsKey(rule)) {
-            int payout = RULE_TO_PAYOUT.get(rule) * bet;
-            foundLines.add(new FoundLine(payline, length, payout));
-        }
-    }
 
     private static Map<Rule, Integer> initRuleToPayout() {
         Map<Rule, Integer> map = new HashMap<>();
@@ -81,16 +34,40 @@ class SpinResultTester {
         return Collections.unmodifiableMap(map);
     }
 
-    List<FoundLine> getFoundLines() {
+    List<FoundLine> test(SpinResult result, int betPerLine, int betOnLinesCount) {
+        betOnLinesCount = clamp(betOnLinesCount, 1, LocalPaylines.LINES.length);
+
+        List<FoundLine> foundLines = new ArrayList<>();
+        for (int i = 0; i < betOnLinesCount; ++i) {
+            testPayline(LocalPaylines.LINES[i], result.getCells(), betPerLine)
+                    .map(foundLines::add);
+        }
         return Collections.unmodifiableList(foundLines);
     }
 
-    int getTotalPayout() {
-        int totalPayout = 0;
-        for (FoundLine line : foundLines) {
-            totalPayout += line.getPayout();
+    private static int clamp(int value, int min, int max) {
+        return Math.min(Math.max(value, min), max);
+    }
+
+    private Optional<FoundLine> testPayline(Payline payline, List<List<Slot>> slots, int bet) {
+        Slot startingSlot = slots.get(payline.cell(0)).get(0);
+        int length = 1;
+
+        for (int i = 1; i < payline.length(); ++i) {
+            if (slots.get(payline.cell(i)).get(i) == startingSlot) {
+                ++length;
+            } else {
+                break;
+            }
         }
-        return totalPayout;
+
+        Rule rule = new Rule(startingSlot, length);
+
+        if (RULE_TO_PAYOUT.containsKey(rule)) {
+            int payout = RULE_TO_PAYOUT.get(rule) * bet;
+            return Optional.of(new FoundLine(payline, length, payout));
+        }
+        return Optional.empty();
     }
 
     public static class Rule {

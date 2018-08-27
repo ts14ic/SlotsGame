@@ -4,6 +4,7 @@ import md.ts14ic.slotsgame.slots.FoundLine;
 import md.ts14ic.slotsgame.slots.SlotsGame;
 import md.ts14ic.slotsgame.slots.SpinResult;
 import md.ts14ic.slotsgame.slots.local.LocalSlotsGame;
+import md.ts14ic.slotsgame.slots.local.LocalSpinResultTester;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class Main {
                 System.out.println(foundLines);
                 System.out.println("totalPayout: " + totalPayout + "\n");
             }
-        });
+        }, new LocalSpinResultTester());
 
         slotsGame.spin(100, 30);
     }

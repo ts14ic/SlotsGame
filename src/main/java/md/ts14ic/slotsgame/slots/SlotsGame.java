@@ -9,5 +9,5 @@ public interface SlotsGame {
         void onTestEnd(List<FoundLine> foundLines, int totalPayout);
     }
 
-    void spin(int bet, int lines);
+    void spin(int betPerLine, int linesBetOnCount);
 }

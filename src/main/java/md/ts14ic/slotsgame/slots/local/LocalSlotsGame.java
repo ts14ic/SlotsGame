@@ -4,29 +4,41 @@ import md.ts14ic.slotsgame.slots.FoundLine;
 import md.ts14ic.slotsgame.slots.SlotsGame;
 import md.ts14ic.slotsgame.slots.SpinResult;
 
+import java.util.List;
+
 import static java.util.Objects.requireNonNull;
 
 public class LocalSlotsGame implements SlotsGame {
     private static final int ROW_COUNT = 3;
     private static final int COLUMN_COUNT = 5;
-    private SlotsGame.Listener mListener;
+    private final LocalSpinResultTester spinResultTester;
+    private final SlotsGame.Listener listener;
 
-    public LocalSlotsGame(SlotsGame.Listener listener) {
-        mListener = requireNonNull(listener);
+    public LocalSlotsGame(SlotsGame.Listener listener, LocalSpinResultTester spinResultTester) {
+        this.listener = requireNonNull(listener);
+        this.spinResultTester = spinResultTester;
     }
 
     @Override
-    public void spin(int bet, int lines) {
+    public void spin(int betPerLine, int linesBetOnCount) {
         SpinResult spinResult = randomSpinResult();
 
-        mListener.onGenerated(spinResult);
+        listener.onGenerated(spinResult);
 
-        SpinResultTester tester = new SpinResultTester(spinResult, bet, lines);
-        for (FoundLine foundLines : tester.getFoundLines()) {
-            mListener.onLineFound(foundLines);
+        List<FoundLine> foundLines = spinResultTester.test(spinResult, betPerLine, linesBetOnCount);
+        for (FoundLine foundLine : foundLines) {
+            listener.onLineFound(foundLine);
         }
 
-        mListener.onTestEnd(tester.getFoundLines(), tester.getTotalPayout());
+        listener.onTestEnd(foundLines, getTotalPayout(foundLines));
+    }
+
+    private int getTotalPayout(List<FoundLine> foundLines) {
+        int totalPayout = 0;
+        for (FoundLine line : foundLines) {
+            totalPayout += line.getPayout();
+        }
+        return totalPayout;
     }
 
     private SpinResult randomSpinResult() {
