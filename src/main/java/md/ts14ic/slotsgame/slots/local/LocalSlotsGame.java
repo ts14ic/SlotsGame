@@ -8,8 +8,8 @@ import md.ts14ic.slotsgame.slots.SpinResult;
 import java.util.*;
 
 public class LocalSlotsGame implements SlotsGame {
-    private static final int ROWS_COUNT = 3;
-    private static final int COLUMNS_COUNT = 5;
+    private static final int ROW_COUNT = 3;
+    private static final int COLUMN_COUNT = 5;
     private static final Map<Rule, Integer> PAYOUTS;
 
     static {
@@ -55,15 +55,11 @@ public class LocalSlotsGame implements SlotsGame {
     }
 
     private SpinResult randomSpinResult() {
-        List<List<Slot>> slots = new ArrayList<>();
-        for (int rowIndex = 0; rowIndex < ROWS_COUNT; ++rowIndex) {
-            List<Slot> row = new ArrayList<>();
-            for (int columnIndex = 0; columnIndex < COLUMNS_COUNT; ++columnIndex) {
-                row.add(LocalSlots.getRandomSlot());
-            }
-            slots.add(row);
-        }
-        return new SpinResult(slots);
+        return SpinResult.fromGenerator(
+                ROW_COUNT,
+                COLUMN_COUNT,
+                (rowIndex, columnIndex) -> LocalSlots.getRandomSlot()
+        );
     }
 
     private void testSpinResult(SpinResult result, int bet, int lines) {
