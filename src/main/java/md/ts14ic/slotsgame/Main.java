@@ -8,13 +8,16 @@ public class Main {
     public static void main(String[] args) {
         SlotsGame slotsGame = new SlotsGameImpl(
                 new LocalSetting(),
-                (betPerLine, linesBetOnCount, spinLayout, testResult) -> {
-                    System.out.println(spinLayout);
-                    System.out.println(testResult.getFoundLines());
+                spinResult -> {
+                    System.out.println(spinResult.getSpinLayout());
+                    System.out.println(spinResult.getFoundLines());
 
                     System.out.println(String.format(
                             "bet per line: %s\nlines bet on: %s\ntotal bet: %s\ntotal payout: %s\n",
-                            betPerLine, linesBetOnCount, betPerLine * linesBetOnCount, testResult.getTotalPayout()
+                            spinResult.getBetPerLine(),
+                            spinResult.getLinesBetOnCount(),
+                            spinResult.getTotalBet(),
+                            spinResult.getTotalPayout()
                     ));
                 }
         );

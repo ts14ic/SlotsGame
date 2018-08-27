@@ -13,9 +13,7 @@ public class SlotsGameImpl implements SlotsGame {
 
     @Override
     public void spin(int betPerLine, int linesBetOnCount) {
-        SpinLayout spinLayout = setting.generateSpinLayout();
-        TestResult testResult = setting.testSpinLayout(spinLayout, betPerLine, linesBetOnCount);
-
-        listener.onSpinEnd(betPerLine, linesBetOnCount, spinLayout, testResult);
+        SpinResult spinResult = setting.spin(betPerLine, linesBetOnCount);
+        listener.onSpinEnd(spinResult);
     }
 }

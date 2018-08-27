@@ -1,9 +1,11 @@
 package md.ts14ic.slotsgame.slots.local;
 
+import md.ts14ic.slotsgame.slots.FoundLine;
 import md.ts14ic.slotsgame.slots.Slot;
 import md.ts14ic.slotsgame.slots.SlotsGame;
 import md.ts14ic.slotsgame.slots.SpinLayout;
-import md.ts14ic.slotsgame.slots.TestResult;
+
+import java.util.List;
 
 public class LocalSetting implements SlotsGame.Setting {
     private final LocalSlotsGenerator localSlotsGenerator = new LocalSlotsGenerator();
@@ -15,7 +17,7 @@ public class LocalSetting implements SlotsGame.Setting {
     }
 
     @Override
-    public TestResult testSpinLayout(SpinLayout result, int betPerLine, int betOnLinesCount) {
+    public List<FoundLine> testSpinLayout(SpinLayout result, int betPerLine, int betOnLinesCount) {
         return localSpinLayoutTester.test(result, betPerLine, betOnLinesCount);
     }
 

@@ -68,7 +68,7 @@ class LocalSpinLayoutTester implements SpinLayoutTester {
     }
 
     @Override
-    public TestResult test(SpinLayout result, int betPerLine, int betOnLinesCount) {
+    public List<FoundLine> test(SpinLayout result, int betPerLine, int betOnLinesCount) {
         betOnLinesCount = clamp(betOnLinesCount, 1, LINES.size());
 
         List<FoundLine> foundLines = new ArrayList<>();
@@ -76,7 +76,7 @@ class LocalSpinLayoutTester implements SpinLayoutTester {
             testPayline(LINES.get(i), result.getCells(), betPerLine)
                     .map(foundLines::add);
         }
-        return new TestResult(foundLines);
+        return Collections.unmodifiableList(foundLines);
     }
 
     private static int clamp(int value, int min, int max) {

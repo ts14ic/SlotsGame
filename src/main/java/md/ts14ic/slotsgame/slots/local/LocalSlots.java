@@ -3,8 +3,6 @@ package md.ts14ic.slotsgame.slots.local;
 import md.ts14ic.slotsgame.slots.Slot;
 
 class LocalSlots {
-    private LocalSlots() {}
-
     static final Slot[] SLOTS = new Slot[]{
             new Slot(0),
             new Slot(1),
@@ -14,4 +12,6 @@ class LocalSlots {
             new Slot(5),
             new Slot(6)
     };
+
+    private LocalSlots() {}
 }

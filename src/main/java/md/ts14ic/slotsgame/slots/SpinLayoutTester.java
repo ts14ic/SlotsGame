@@ -1,5 +1,7 @@
 package md.ts14ic.slotsgame.slots;
 
+import java.util.List;
+
 public interface SpinLayoutTester {
-    TestResult test(SpinLayout result, int betPerLine, int betOnLinesCount);
+    List<FoundLine> test(SpinLayout result, int betPerLine, int betOnLinesCount);
 }
