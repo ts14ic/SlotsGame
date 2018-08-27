@@ -1,9 +1,11 @@
 package md.ts14ic.slotsgame.slots;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class SpinResult {
-    private Slot mSlots[][];
+    private List<List<Slot>> mSlots;
     private int mColumns;
     private int mRows;
 
@@ -12,23 +14,30 @@ public class SpinResult {
     }
 
     public SpinResult(int rows, int columns) {
-        mSlots = new Slot[rows][columns];
+        mSlots = new ArrayList<>();
+        for (int rowIndex = 0; rowIndex < rows; ++rowIndex) {
+            List<Slot> row = new ArrayList<>();
+            for (int columnIndex = 0; columnIndex < columns; ++columnIndex) {
+                row.add(null);
+            }
+            mSlots.add(row);
+        }
         mRows = rows;
         mColumns = columns;
     }
 
     public void setCell(int row, int column, Slot slot) {
-        mSlots[row][column] = slot;
+        mSlots.get(row).set(column, slot);
     }
 
     public void copyFrom(SpinResult other) {
-        mSlots = Arrays.copyOf(other.mSlots, other.mSlots.length);
+        mSlots = new ArrayList<>(other.mSlots);
         mColumns = other.mColumns;
         mRows = other.mRows;
     }
 
-    public Slot[][] getCells() {
-        return mSlots;
+    public List<List<Slot>> getCells() {
+        return Collections.unmodifiableList(mSlots);
     }
 
     public int getColumns() {
@@ -43,8 +52,8 @@ public class SpinResult {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("\n");
-        for (Slot[] row : mSlots) {
-            builder.append(Arrays.toString(row)).append("\n");
+        for (List<Slot> row : mSlots) {
+            builder.append(row).append("\n");
         }
         return builder.toString();
     }

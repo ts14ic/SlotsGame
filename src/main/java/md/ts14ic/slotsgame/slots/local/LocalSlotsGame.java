@@ -61,7 +61,7 @@ public class LocalSlotsGame implements SlotsGame {
     }
 
     private void testSpinResult(SpinResult result, int bet, int lines) {
-        Slot[][] slots = result.getCells();
+        List<List<Slot>> slots = result.getCells();
 
         lines = Math.max(lines, 1);
         lines = Math.min(lines, LocalPaylines.LINES.length);
@@ -73,12 +73,12 @@ public class LocalSlotsGame implements SlotsGame {
         }
     }
 
-    private void testPayline(Payline payline, Slot[][] slots, int bet) {
-        Slot startingSlot = slots[payline.cell(0)][0];
+    private void testPayline(Payline payline, List<List<Slot>> slots, int bet) {
+        Slot startingSlot = slots.get(payline.cell(0)).get(0);
         int length = 1;
 
         for (int i = 1; i < payline.length(); ++i) {
-            if (slots[payline.cell(i)][i] == startingSlot) {
+            if (slots.get(payline.cell(i)).get(i) == startingSlot) {
                 ++length;
             } else {
                 break;
