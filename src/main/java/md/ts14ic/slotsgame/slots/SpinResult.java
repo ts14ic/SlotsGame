@@ -27,7 +27,7 @@ public class SpinResult {
             }
             slots.add(Collections.unmodifiableList(row));
         }
-        return new SpinResult(Collections.unmodifiableList(slots));
+        return new SpinResult(slots);
     }
 
     public List<List<Slot>> getCells() {
