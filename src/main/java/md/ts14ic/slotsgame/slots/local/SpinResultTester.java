@@ -25,16 +25,15 @@ class SpinResultTester {
     }
 
     private void test(SpinResult result, int bet, int lines) {
-        List<List<Slot>> slots = result.getCells();
-
-        lines = Math.max(lines, 1);
-        lines = Math.min(lines, LocalPaylines.LINES.length);
-
         paylines.clear();
-
+        lines = clamp(lines, 1, LocalPaylines.LINES.length);
         for (int i = 0; i < lines; ++i) {
-            testPayline(LocalPaylines.LINES[i], slots, bet);
+            testPayline(LocalPaylines.LINES[i], result.getCells(), bet);
         }
+    }
+
+    private static int clamp(int value, int min, int max) {
+        return Math.min(Math.max(value, min), max);
     }
 
     private void testPayline(Payline payline, List<List<Slot>> slots, int bet) {
