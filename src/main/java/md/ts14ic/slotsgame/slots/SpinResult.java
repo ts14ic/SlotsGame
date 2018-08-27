@@ -8,7 +8,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 
 public class SpinResult {
-    private List<List<Slot>> slots;
+    private final List<List<Slot>> slots;
 
     private SpinResult(@Nonnull List<List<Slot>> slots) {
         this.slots = requireNonNull(slots);
@@ -27,7 +27,7 @@ public class SpinResult {
             }
             slots.add(Collections.unmodifiableList(row));
         }
-        return new SpinResult(slots);
+        return new SpinResult(Collections.unmodifiableList(slots));
     }
 
     public List<List<Slot>> getCells() {
