@@ -70,7 +70,7 @@ public class LocalSpinResultTester {
         return Optional.empty();
     }
 
-    public static class Rule {
+    private static class Rule {
         private final Slot type;
         private final int length;
 
