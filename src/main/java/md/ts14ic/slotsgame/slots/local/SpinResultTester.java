@@ -15,7 +15,6 @@ class SpinResultTester {
     private final int betOnLinesCount;
 
     private final List<FoundLine> foundLines;
-    private int totalPayout;
 
     SpinResultTester(
             SpinResult spinResult,
@@ -56,7 +55,6 @@ class SpinResultTester {
 
         if (RULE_TO_PAYOUT.containsKey(rule)) {
             int payout = RULE_TO_PAYOUT.get(rule) * bet;
-            totalPayout += payout;
             foundLines.add(new FoundLine(payline, length, payout));
         }
     }
@@ -88,6 +86,10 @@ class SpinResultTester {
     }
 
     int getTotalPayout() {
+        int totalPayout = 0;
+        for (FoundLine line : foundLines) {
+            totalPayout += line.getPayout();
+        }
         return totalPayout;
     }
 

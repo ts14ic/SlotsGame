@@ -11,6 +11,10 @@ public class FoundLine {
         this.payout = payout;
     }
 
+    public int getPayout() {
+        return payout;
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder("[ |");
