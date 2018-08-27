@@ -1,6 +1,6 @@
-package eu.qbet.slotsgame.slots.local;
+package md.ts14ic.slotsgame.slots.local;
 
-import eu.qbet.slotsgame.slots.Slot;
+import md.ts14ic.slotsgame.slots.Slot;
 
 import java.util.Random;
 

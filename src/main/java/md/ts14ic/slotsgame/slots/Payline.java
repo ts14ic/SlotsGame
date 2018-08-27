@@ -1,4 +1,4 @@
-package eu.qbet.slotsgame.slots;
+package md.ts14ic.slotsgame.slots;
 
 @SuppressWarnings("unused")
 public class Payline {

@@ -1,4 +1,4 @@
-package eu.qbet.slotsgame.slots;
+package md.ts14ic.slotsgame.slots;
 
 public class Slot {
     private int mId;

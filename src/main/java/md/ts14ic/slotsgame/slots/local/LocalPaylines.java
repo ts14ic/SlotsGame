@@ -1,6 +1,6 @@
-package eu.qbet.slotsgame.slots.local;
+package md.ts14ic.slotsgame.slots.local;
 
-import eu.qbet.slotsgame.slots.Payline;
+import md.ts14ic.slotsgame.slots.Payline;
 
 public abstract class LocalPaylines {
     public static final Payline[] LINES = new Payline[] {
