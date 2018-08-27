@@ -11,7 +11,6 @@ public class LocalSlotsGame implements SlotsGame {
     private static final int ROWS_COUNT = 3;
     private static final int COLUMNS_COUNT = 5;
     private static final Map<Rule, Integer> mPayouts = new HashMap<>();
-    private static Rule sDummyRule = new Rule(new Slot(0), 0);
 
     private List<Payline> mPaylines = new ArrayList<>();
     private SlotsGame.Listener mListener;
@@ -84,11 +83,10 @@ public class LocalSlotsGame implements SlotsGame {
             }
         }
 
-        sDummyRule.type = startingSlot;
-        sDummyRule.length = length;
+        Rule rule = new Rule(startingSlot, length);
 
-        if (mPayouts.containsKey(sDummyRule)) {
-            int payout = mPayouts.get(sDummyRule) * bet;
+        if (mPayouts.containsKey(rule)) {
+            int payout = mPayouts.get(rule) * bet;
             mTotalPayout += payout;
             mPaylines.add(payline);
             mListener.onLineFound(payline, length, payout);
