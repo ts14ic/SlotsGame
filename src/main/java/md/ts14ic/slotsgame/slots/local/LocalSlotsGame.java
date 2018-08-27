@@ -22,7 +22,7 @@ public class LocalSlotsGame implements SlotsGame {
 
         SpinResultTester tester = new SpinResultTester(spinResult, bet, lines, mListener);
 
-        mListener.onTestEnd(tester.getPaylines(), tester.getTotalPayout());
+        mListener.onTestEnd(tester.getFoundLines(), tester.getTotalPayout());
     }
 
     private SpinResult randomSpinResult() {

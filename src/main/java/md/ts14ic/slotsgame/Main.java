@@ -1,6 +1,6 @@
 package md.ts14ic.slotsgame;
 
-import md.ts14ic.slotsgame.slots.Payline;
+import md.ts14ic.slotsgame.slots.FoundLine;
 import md.ts14ic.slotsgame.slots.SlotsGame;
 import md.ts14ic.slotsgame.slots.SpinResult;
 import md.ts14ic.slotsgame.slots.local.LocalSlotsGame;
@@ -16,11 +16,11 @@ public class Main {
             }
 
             @Override
-            public void onLineFound(Payline payline, int length, int payout) {}
+            public void onLineFound(FoundLine foundLine) {}
 
             @Override
-            public void onTestEnd(List<Payline> paylines, int totalPayout) {
-                System.out.println(paylines);
+            public void onTestEnd(List<FoundLine> foundLines, int totalPayout) {
+                System.out.println(foundLines);
                 System.out.println("totalPayout: " + totalPayout + "\n");
             }
         });

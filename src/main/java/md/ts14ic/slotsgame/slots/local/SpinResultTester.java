@@ -1,5 +1,6 @@
 package md.ts14ic.slotsgame.slots.local;
 
+import md.ts14ic.slotsgame.slots.FoundLine;
 import md.ts14ic.slotsgame.slots.Payline;
 import md.ts14ic.slotsgame.slots.Slot;
 import md.ts14ic.slotsgame.slots.SpinResult;
@@ -14,7 +15,7 @@ class SpinResultTester {
     private final int betPerLine;
     private final int betOnLinesCount;
 
-    private final List<Payline> paylines;
+    private final List<FoundLine> foundLines;
     private int totalPayout;
 
     SpinResultTester(
@@ -26,7 +27,7 @@ class SpinResultTester {
         this.listener = listener;
         this.betPerLine = betPerLine;
         this.betOnLinesCount = clamp(betOnLinesCount, 1, LocalPaylines.LINES.length);
-        this.paylines = new ArrayList<>();
+        this.foundLines = new ArrayList<>();
 
         test(spinResult);
     }
@@ -36,9 +37,13 @@ class SpinResultTester {
     }
 
     private void test(SpinResult result) {
-        paylines.clear();
+        foundLines.clear();
         for (int i = 0; i < betOnLinesCount; ++i) {
             testPayline(LocalPaylines.LINES[i], result.getCells(), betPerLine);
+        }
+
+        for (FoundLine line : foundLines) {
+            listener.onLineFound(line);
         }
     }
 
@@ -59,8 +64,7 @@ class SpinResultTester {
         if (RULE_TO_PAYOUT.containsKey(rule)) {
             int payout = RULE_TO_PAYOUT.get(rule) * bet;
             totalPayout += payout;
-            paylines.add(payline);
-            listener.onLineFound(payline, length, payout);
+            foundLines.add(new FoundLine(payline, length, payout));
         }
     }
 
@@ -86,8 +90,8 @@ class SpinResultTester {
         return Collections.unmodifiableMap(map);
     }
 
-    List<Payline> getPaylines() {
-        return Collections.unmodifiableList(paylines);
+    List<FoundLine> getFoundLines() {
+        return Collections.unmodifiableList(foundLines);
     }
 
     int getTotalPayout() {
