@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface SlotsGame {
     interface Listener {
-        void onGenerated(SlotSet generatedSlotSet);
+        void onGenerated(SpinResult generatedSpinResult);
         void onLineFound(Payline payline, int length, int payout);
         void onTestEnd(List<Payline> paylines, int totalPayout);
     }

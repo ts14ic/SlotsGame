@@ -1,8 +1,8 @@
 package md.ts14ic.slotsgame;
 
 import md.ts14ic.slotsgame.slots.Payline;
-import md.ts14ic.slotsgame.slots.SlotSet;
 import md.ts14ic.slotsgame.slots.SlotsGame;
+import md.ts14ic.slotsgame.slots.SpinResult;
 import md.ts14ic.slotsgame.slots.local.LocalSlotsGame;
 
 import java.util.List;
@@ -14,14 +14,14 @@ public class Main {
     }
 
     private void execute() {
-        final SlotSet slotSet = new SlotSet();
+        final SpinResult spinResult = new SpinResult();
 
         SlotsGame slotsGame = new LocalSlotsGame(new SlotsGame.Listener() {
             @Override
-            public void onGenerated(SlotSet generatedCellSet) {
-                slotSet.copyFrom(generatedCellSet);
+            public void onGenerated(SpinResult generatedCellSet) {
+                spinResult.copyFrom(generatedCellSet);
 
-                System.out.println(slotSet);
+                System.out.println(spinResult);
             }
 
             @Override

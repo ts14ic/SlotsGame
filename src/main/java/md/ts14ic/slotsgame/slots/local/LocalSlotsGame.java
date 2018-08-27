@@ -2,8 +2,8 @@ package md.ts14ic.slotsgame.slots.local;
 
 import md.ts14ic.slotsgame.slots.Payline;
 import md.ts14ic.slotsgame.slots.Slot;
-import md.ts14ic.slotsgame.slots.SlotSet;
 import md.ts14ic.slotsgame.slots.SlotsGame;
+import md.ts14ic.slotsgame.slots.SpinResult;
 
 import java.util.*;
 
@@ -45,23 +45,23 @@ public class LocalSlotsGame implements SlotsGame {
     @Override
     public void spin(int bet, int lines) {
         mTotalPayout = 0;
-        SlotSet slotSet = new SlotSet(ROWS_COUNT, COLUMNS_COUNT);
+        SpinResult spinResult = new SpinResult(ROWS_COUNT, COLUMNS_COUNT);
 
-        for (int r = 0; r < slotSet.getRows(); ++r) {
-            for (int c = 0; c < slotSet.getColumns(); ++c) {
-                slotSet.setCell(r, c, LocalSlots.getRandomSlot());
+        for (int r = 0; r < spinResult.getRows(); ++r) {
+            for (int c = 0; c < spinResult.getColumns(); ++c) {
+                spinResult.setCell(r, c, LocalSlots.getRandomSlot());
             }
         }
 
-        mListener.onGenerated(slotSet);
+        mListener.onGenerated(spinResult);
 
-        testCellset(slotSet, bet, lines);
+        testSpinResult(spinResult, bet, lines);
 
         mListener.onTestEnd(mPaylines, mTotalPayout);
     }
 
-    private void testCellset(SlotSet set, int bet, int lines) {
-        Slot[][] slots = set.getCells();
+    private void testSpinResult(SpinResult result, int bet, int lines) {
+        Slot[][] slots = result.getCells();
 
         lines = Math.max(lines, 1);
         lines = Math.min(lines, LocalPaylines.LINES.length);

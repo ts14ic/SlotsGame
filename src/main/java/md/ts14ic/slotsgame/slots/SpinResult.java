@@ -2,16 +2,16 @@ package md.ts14ic.slotsgame.slots;
 
 import java.util.Arrays;
 
-public class SlotSet {
+public class SpinResult {
     private Slot mSlots[][];
     private int mColumns;
     private int mRows;
 
-    public SlotSet() {
+    public SpinResult() {
         this(0, 0);
     }
 
-    public SlotSet(int rows, int columns) {
+    public SpinResult(int rows, int columns) {
         mSlots = new Slot[rows][columns];
         mRows = rows;
         mColumns = columns;
@@ -21,10 +21,10 @@ public class SlotSet {
         mSlots[row][column] = slot;
     }
 
-    public void copyFrom(SlotSet otherSet) {
-        mSlots = Arrays.copyOf(otherSet.mSlots, otherSet.mSlots.length);
-        mColumns = otherSet.mColumns;
-        mRows = otherSet.mRows;
+    public void copyFrom(SpinResult other) {
+        mSlots = Arrays.copyOf(other.mSlots, other.mSlots.length);
+        mColumns = other.mColumns;
+        mRows = other.mRows;
     }
 
     public Slot[][] getCells() {
