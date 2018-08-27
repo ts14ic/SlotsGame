@@ -1,7 +1,5 @@
 package md.ts14ic.slotsgame.slots;
 
-import java.util.List;
-
 import static java.util.Objects.requireNonNull;
 
 public class SlotsGameImpl implements SlotsGame {
@@ -9,12 +7,12 @@ public class SlotsGameImpl implements SlotsGame {
     private final int columnCount;
     private final SpinResultTester spinResultTester;
     private final SlotsGame.Listener listener;
-    private final SpinResult.Generator generator;
+    private final SpinLayout.Generator generator;
 
     public SlotsGameImpl(
             int rowCount,
             int columnCount,
-            SpinResult.Generator generator,
+            SpinLayout.Generator generator,
             SpinResultTester spinResultTester,
             Listener listener
     ) {
@@ -27,23 +25,9 @@ public class SlotsGameImpl implements SlotsGame {
 
     @Override
     public void spin(int betPerLine, int linesBetOnCount) {
-        SpinResult spinResult = SpinResult.fromGenerator(rowCount, columnCount, generator);
+        SpinLayout spinLayout = SpinLayout.fromGenerator(rowCount, columnCount, generator);
+        TestResult testResult = spinResultTester.test(spinLayout, betPerLine, linesBetOnCount);
 
-        listener.onGenerated(spinResult);
-
-        List<FoundLine> foundLines = spinResultTester.test(spinResult, betPerLine, linesBetOnCount);
-        for (FoundLine foundLine : foundLines) {
-            listener.onLineFound(foundLine);
-        }
-
-        listener.onTestEnd(foundLines, getTotalPayout(foundLines));
-    }
-
-    private int getTotalPayout(List<FoundLine> foundLines) {
-        int totalPayout = 0;
-        for (FoundLine line : foundLines) {
-            totalPayout += line.getPayout();
-        }
-        return totalPayout;
+        listener.onSpinEnd(spinLayout, testResult);
     }
 }

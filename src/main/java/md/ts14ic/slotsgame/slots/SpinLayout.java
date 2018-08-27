@@ -7,14 +7,14 @@ import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 
-public class SpinResult {
+public class SpinLayout {
     private final List<List<Slot>> slots;
 
-    private SpinResult(@Nonnull List<List<Slot>> slots) {
+    private SpinLayout(@Nonnull List<List<Slot>> slots) {
         this.slots = requireNonNull(slots);
     }
 
-    static SpinResult fromGenerator(
+    static SpinLayout fromGenerator(
             int rowCount,
             int columnCount,
             Generator generator
@@ -27,7 +27,7 @@ public class SpinResult {
             }
             slots.add(Collections.unmodifiableList(row));
         }
-        return new SpinResult(slots);
+        return new SpinLayout(slots);
     }
 
     public List<List<Slot>> getCells() {
