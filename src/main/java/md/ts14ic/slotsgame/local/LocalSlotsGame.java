@@ -11,7 +11,7 @@ import static java.util.Objects.requireNonNull;
 public class LocalSlotsGame implements SlotsGame {
     private static final int ROW_COUNT = 3;
     private static final int COLUMN_COUNT = 5;
-    private final LocalSpinLayoutTester layoutTester = new LocalSpinLayoutTester();
+    private final SpinLayoutTester layoutTester = new SpinLayoutTester();
     private final Listener listener;
 
     public LocalSlotsGame(Listener listener) {
@@ -31,7 +31,7 @@ public class LocalSlotsGame implements SlotsGame {
         for (int rowIndex = 0; rowIndex < ROW_COUNT; ++rowIndex) {
             List<Slot> row = new ArrayList<>();
             for (int columnIndex = 0; columnIndex < COLUMN_COUNT; ++columnIndex) {
-                row.add(LocalSlots.createRandomSlot());
+                row.add(Slots.createRandomSlot());
             }
             slots.add(Collections.unmodifiableList(row));
         }

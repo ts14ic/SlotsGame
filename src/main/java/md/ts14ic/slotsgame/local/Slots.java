@@ -4,7 +4,7 @@ import md.ts14ic.slotsgame.slots.Slot;
 
 import java.util.Random;
 
-class LocalSlots {
+class Slots {
     static final Slot[] SLOTS = new Slot[]{
             new Slot(0),
             new Slot(1),
@@ -16,7 +16,7 @@ class LocalSlots {
     };
     private static final Random RANDOM = new Random();
 
-    private LocalSlots() {
+    private Slots() {
     }
 
     static Slot createRandomSlot() {

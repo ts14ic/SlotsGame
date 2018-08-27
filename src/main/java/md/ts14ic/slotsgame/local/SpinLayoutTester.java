@@ -9,7 +9,7 @@ import java.util.*;
 
 import static java.util.Objects.requireNonNull;
 
-class LocalSpinLayoutTester {
+class SpinLayoutTester {
     private static final List<RuleLine> LINES = initRuleLines();
     private static final Map<Rule, Integer> RULE_TO_PAYOUT = initRuleToPayout();
 
@@ -50,23 +50,23 @@ class LocalSpinLayoutTester {
 
     private static Map<Rule, Integer> initRuleToPayout() {
         Map<Rule, Integer> map = new HashMap<>();
-        map.put(new Rule(LocalSlots.SLOTS[0], 2), 40);
-        map.put(new Rule(LocalSlots.SLOTS[0], 3), 75);
-        map.put(new Rule(LocalSlots.SLOTS[0], 4), 200);
-        map.put(new Rule(LocalSlots.SLOTS[0], 5), 750);
+        map.put(new Rule(Slots.SLOTS[0], 2), 40);
+        map.put(new Rule(Slots.SLOTS[0], 3), 75);
+        map.put(new Rule(Slots.SLOTS[0], 4), 200);
+        map.put(new Rule(Slots.SLOTS[0], 5), 750);
 
-        map.put(new Rule(LocalSlots.SLOTS[1], 2), 3);
-        map.put(new Rule(LocalSlots.SLOTS[1], 3), 10);
-        map.put(new Rule(LocalSlots.SLOTS[1], 4), 30);
-        map.put(new Rule(LocalSlots.SLOTS[1], 5), 40);
+        map.put(new Rule(Slots.SLOTS[1], 2), 3);
+        map.put(new Rule(Slots.SLOTS[1], 3), 10);
+        map.put(new Rule(Slots.SLOTS[1], 4), 30);
+        map.put(new Rule(Slots.SLOTS[1], 5), 40);
 
-        map.put(new Rule(LocalSlots.SLOTS[2], 3), 10);
-        map.put(new Rule(LocalSlots.SLOTS[2], 4), 10);
-        map.put(new Rule(LocalSlots.SLOTS[2], 5), 100);
+        map.put(new Rule(Slots.SLOTS[2], 3), 10);
+        map.put(new Rule(Slots.SLOTS[2], 4), 10);
+        map.put(new Rule(Slots.SLOTS[2], 5), 100);
 
-        map.put(new Rule(LocalSlots.SLOTS[3], 3), 30);
-        map.put(new Rule(LocalSlots.SLOTS[3], 4), 100);
-        map.put(new Rule(LocalSlots.SLOTS[3], 5), 500);
+        map.put(new Rule(Slots.SLOTS[3], 3), 30);
+        map.put(new Rule(Slots.SLOTS[3], 4), 100);
+        map.put(new Rule(Slots.SLOTS[3], 5), 500);
         return Collections.unmodifiableMap(map);
     }
 
