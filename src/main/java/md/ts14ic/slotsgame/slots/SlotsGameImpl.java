@@ -1,22 +1,17 @@
-package md.ts14ic.slotsgame.slots.local;
-
-import md.ts14ic.slotsgame.slots.FoundLine;
-import md.ts14ic.slotsgame.slots.SlotsGame;
-import md.ts14ic.slotsgame.slots.SpinResult;
-import md.ts14ic.slotsgame.slots.SpinResultTester;
+package md.ts14ic.slotsgame.slots;
 
 import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 
-public class LocalSlotsGame implements SlotsGame {
+public class SlotsGameImpl implements SlotsGame {
     private final int rowCount;
     private final int columnCount;
     private final SpinResultTester spinResultTester;
     private final SlotsGame.Listener listener;
     private final SpinResult.Generator generator;
 
-    public LocalSlotsGame(
+    public SlotsGameImpl(
             int rowCount,
             int columnCount,
             SpinResult.Generator generator,
