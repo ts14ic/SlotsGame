@@ -14,7 +14,7 @@ public class SpinResult {
         this.slots = requireNonNull(slots);
     }
 
-    public static SpinResult fromGenerator(
+    static SpinResult fromGenerator(
             int rowCount,
             int columnCount,
             Generator generator
