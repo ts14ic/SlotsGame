@@ -1,23 +1,30 @@
 package md.ts14ic.slotsgame.slots;
 
-@SuppressWarnings("unused")
-public class Payline {
-    private int[] mReels;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-    public Payline(int[] reels) {
-        mReels = reels;
+public class Payline {
+    private final List<Integer> cells;
+
+    public Payline(int... cells) {
+        this.cells = toList(cells);
+    }
+
+    private List<Integer> toList(int[] ints) {
+        List<Integer> result = new ArrayList<>(ints.length);
+        for (int i : ints) {
+            result.add(i);
+        }
+        return Collections.unmodifiableList(result);
     }
 
     public int length() {
-        return mReels.length;
-    }
-
-    public int[] cells() {
-        return mReels;
+        return cells.size();
     }
 
     public int cell(int column) {
-        return mReels[column];
+        return cells.get(column);
     }
 
     @Override
@@ -25,7 +32,7 @@ public class Payline {
         StringBuilder builder = new StringBuilder();
         builder.append("\n");
         builder.append("|");
-        for (int cell : mReels) {
+        for (int cell : cells) {
             builder.append(cell);
         }
         builder.append("|\n");
