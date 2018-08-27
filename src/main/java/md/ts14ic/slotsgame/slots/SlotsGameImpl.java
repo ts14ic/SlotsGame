@@ -5,28 +5,25 @@ import static java.util.Objects.requireNonNull;
 public class SlotsGameImpl implements SlotsGame {
     private final int rowCount;
     private final int columnCount;
-    private final SpinLayoutTester spinLayoutTester;
     private final SlotsGame.Listener listener;
-    private final SpinLayout.Generator generator;
+    private final Setting setting;
 
     public SlotsGameImpl(
             int rowCount,
             int columnCount,
-            SpinLayout.Generator generator,
-            SpinLayoutTester spinLayoutTester,
+            Setting setting,
             Listener listener
     ) {
         this.rowCount = rowCount;
         this.columnCount = columnCount;
-        this.generator = requireNonNull(generator);
-        this.spinLayoutTester = requireNonNull(spinLayoutTester);
+        this.setting = requireNonNull(setting);
         this.listener = requireNonNull(listener);
     }
 
     @Override
     public void spin(int betPerLine, int linesBetOnCount) {
-        SpinLayout spinLayout = SpinLayout.fromGenerator(rowCount, columnCount, generator);
-        TestResult testResult = spinLayoutTester.test(spinLayout, betPerLine, linesBetOnCount);
+        SpinLayout spinLayout = SpinLayout.fromGenerator(rowCount, columnCount, setting::generateSlot);
+        TestResult testResult = setting.testSpinLayout(spinLayout, betPerLine, linesBetOnCount);
 
         listener.onSpinEnd(betPerLine, linesBetOnCount, spinLayout, testResult);
     }

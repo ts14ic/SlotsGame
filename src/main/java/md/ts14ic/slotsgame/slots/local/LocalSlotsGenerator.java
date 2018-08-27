@@ -5,7 +5,7 @@ import md.ts14ic.slotsgame.slots.SpinLayout;
 
 import java.util.Random;
 
-public class LocalSlotsGenerator implements SpinLayout.Generator {
+class LocalSlotsGenerator implements SpinLayout.Generator {
     @Override
     public Slot generate(int rowIndex, int columnIndex) {
         return createRandomSlot();
