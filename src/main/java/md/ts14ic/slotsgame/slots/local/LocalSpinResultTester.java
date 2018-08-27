@@ -7,7 +7,43 @@ import java.util.*;
 import static java.util.Objects.requireNonNull;
 
 public class LocalSpinResultTester implements SpinResultTester {
+    private static final List<RuleLine> LINES = initRuleLines();
     private static final Map<Rule, Integer> RULE_TO_PAYOUT = initRuleToPayout();
+
+    private static List<RuleLine> initRuleLines() {
+        return Arrays.asList(
+                new RuleLine(1, 0, 1, 2, 1),
+                new RuleLine(1, 1, 1, 1, 1),
+                new RuleLine(0, 0, 0, 0, 0),
+                new RuleLine(2, 2, 2, 2, 2),
+                new RuleLine(0, 1, 2, 1, 0),
+                new RuleLine(2, 1, 0, 1, 2),
+                new RuleLine(1, 0, 0, 0, 1),
+                new RuleLine(1, 2, 2, 2, 1),
+                new RuleLine(0, 0, 1, 2, 2),
+                new RuleLine(2, 2, 1, 0, 0),
+                new RuleLine(0, 2, 2, 0, 1),
+                new RuleLine(0, 1, 1, 1, 0),
+                new RuleLine(2, 1, 1, 1, 2),
+                new RuleLine(0, 1, 0, 1, 0),
+                new RuleLine(2, 1, 2, 1, 2),
+                new RuleLine(1, 1, 0, 1, 1),
+                new RuleLine(1, 1, 2, 1, 1),
+                new RuleLine(0, 0, 2, 0, 0),
+                new RuleLine(2, 2, 0, 2, 2),
+                new RuleLine(0, 2, 2, 2, 0),
+                new RuleLine(2, 0, 0, 0, 2),
+                new RuleLine(1, 2, 0, 2, 1),
+                new RuleLine(1, 0, 2, 0, 1),
+                new RuleLine(0, 2, 0, 2, 0),
+                new RuleLine(2, 0, 2, 0, 2),
+                new RuleLine(2, 0, 1, 2, 0),
+                new RuleLine(0, 2, 1, 0, 2),
+                new RuleLine(0, 2, 1, 2, 0),
+                new RuleLine(2, 0, 1, 0, 2),
+                new RuleLine(2, 1, 0, 0, 1)
+        );
+    }
 
     private static Map<Rule, Integer> initRuleToPayout() {
         Map<Rule, Integer> map = new HashMap<>();
@@ -33,11 +69,11 @@ public class LocalSpinResultTester implements SpinResultTester {
 
     @Override
     public List<FoundLine> test(SpinResult result, int betPerLine, int betOnLinesCount) {
-        betOnLinesCount = clamp(betOnLinesCount, 1, LocalPaylines.LINES.length);
+        betOnLinesCount = clamp(betOnLinesCount, 1, LINES.size());
 
         List<FoundLine> foundLines = new ArrayList<>();
         for (int i = 0; i < betOnLinesCount; ++i) {
-            testPayline(LocalPaylines.LINES[i], result.getCells(), betPerLine)
+            testPayline(LINES.get(i), result.getCells(), betPerLine)
                     .map(foundLines::add);
         }
         return Collections.unmodifiableList(foundLines);
