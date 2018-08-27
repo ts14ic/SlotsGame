@@ -11,7 +11,6 @@ import static java.util.Objects.requireNonNull;
 
 class SpinResultTester {
     private static final Map<Rule, Integer> RULE_TO_PAYOUT = initRuleToPayout();
-    private final LocalSlotsGame.Listener listener;
     private final int betPerLine;
     private final int betOnLinesCount;
 
@@ -21,10 +20,8 @@ class SpinResultTester {
     SpinResultTester(
             SpinResult spinResult,
             int betPerLine,
-            int betOnLinesCount,
-            LocalSlotsGame.Listener listener
+            int betOnLinesCount
     ) {
-        this.listener = listener;
         this.betPerLine = betPerLine;
         this.betOnLinesCount = clamp(betOnLinesCount, 1, LocalPaylines.LINES.length);
         this.foundLines = new ArrayList<>();
@@ -40,10 +37,6 @@ class SpinResultTester {
         foundLines.clear();
         for (int i = 0; i < betOnLinesCount; ++i) {
             testPayline(LocalPaylines.LINES[i], result.getCells(), betPerLine);
-        }
-
-        for (FoundLine line : foundLines) {
-            listener.onLineFound(line);
         }
     }
 

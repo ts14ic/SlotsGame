@@ -16,7 +16,9 @@ public class Main {
             }
 
             @Override
-            public void onLineFound(FoundLine foundLine) {}
+            public void onLineFound(FoundLine foundLine) {
+                System.out.println("Found line: " + foundLine);
+            }
 
             @Override
             public void onTestEnd(List<FoundLine> foundLines, int totalPayout) {

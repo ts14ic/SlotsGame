@@ -1,5 +1,6 @@
 package md.ts14ic.slotsgame.slots.local;
 
+import md.ts14ic.slotsgame.slots.FoundLine;
 import md.ts14ic.slotsgame.slots.SlotsGame;
 import md.ts14ic.slotsgame.slots.SpinResult;
 
@@ -20,7 +21,10 @@ public class LocalSlotsGame implements SlotsGame {
 
         mListener.onGenerated(spinResult);
 
-        SpinResultTester tester = new SpinResultTester(spinResult, bet, lines, mListener);
+        SpinResultTester tester = new SpinResultTester(spinResult, bet, lines);
+        for (FoundLine foundLines : tester.getFoundLines()) {
+            mListener.onLineFound(foundLines);
+        }
 
         mListener.onTestEnd(tester.getFoundLines(), tester.getTotalPayout());
     }
