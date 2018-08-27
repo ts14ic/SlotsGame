@@ -12,7 +12,7 @@ public class SpinResult {
     private final int totalBet;
     private final int totalPayout;
 
-    SpinResult(
+    public SpinResult(
             SpinLayout spinLayout,
             List<FoundLine> foundLines,
             int betPerLine,

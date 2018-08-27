@@ -14,7 +14,7 @@ public class SpinLayout {
         this.slots = requireNonNull(slots);
     }
 
-    static SpinLayout fromGenerator(
+    public static SpinLayout fromGenerator(
             int rowCount,
             int columnCount,
             Generator generator

@@ -1,9 +1,6 @@
 package md.ts14ic.slotsgame.slots.local;
 
-import md.ts14ic.slotsgame.slots.FoundLine;
-import md.ts14ic.slotsgame.slots.Slot;
-import md.ts14ic.slotsgame.slots.SlotsGame;
-import md.ts14ic.slotsgame.slots.SpinLayout;
+import md.ts14ic.slotsgame.slots.*;
 
 import java.util.List;
 
@@ -12,22 +9,29 @@ public class LocalSetting implements SlotsGame.Setting {
     private final LocalSpinLayoutTester localSpinLayoutTester = new LocalSpinLayoutTester();
 
     @Override
-    public Slot generateSlot(int rowIndex, int columnIndex) {
-        return localSlotsGenerator.generate(rowIndex, columnIndex);
+    public SpinResult spin(int betPerLine, int linesBetOnCount) {
+        SpinLayout spinLayout = generateSpinLayout();
+        List<FoundLine> foundLines = testSpinLayout(spinLayout, betPerLine, linesBetOnCount);
+        return new SpinResult(spinLayout, foundLines, betPerLine, linesBetOnCount);
     }
 
-    @Override
-    public List<FoundLine> testSpinLayout(SpinLayout result, int betPerLine, int betOnLinesCount) {
+    private SpinLayout generateSpinLayout() {
+        return SpinLayout.fromGenerator(getRowCount(), getColumnCount(), this::generateSlot);
+    }
+
+    private List<FoundLine> testSpinLayout(SpinLayout result, int betPerLine, int betOnLinesCount) {
         return localSpinLayoutTester.test(result, betPerLine, betOnLinesCount);
     }
 
-    @Override
-    public int getRowCount() {
+    private int getRowCount() {
         return 3;
     }
 
-    @Override
-    public int getColumnCount() {
+    private int getColumnCount() {
         return 5;
+    }
+
+    private Slot generateSlot(int rowIndex, int columnIndex) {
+        return localSlotsGenerator.generate(rowIndex, columnIndex);
     }
 }
