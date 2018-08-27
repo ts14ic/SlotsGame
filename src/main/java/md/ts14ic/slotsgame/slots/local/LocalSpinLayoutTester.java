@@ -6,7 +6,7 @@ import java.util.*;
 
 import static java.util.Objects.requireNonNull;
 
-public class LocalSpinResultTester implements SpinResultTester {
+public class LocalSpinLayoutTester implements SpinLayoutTester {
     private static final List<RuleLine> LINES = initRuleLines();
     private static final Map<Rule, Integer> RULE_TO_PAYOUT = initRuleToPayout();
 

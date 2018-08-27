@@ -4,6 +4,6 @@ public interface SlotsGame {
     void spin(int betPerLine, int linesBetOnCount);
 
     interface Listener {
-        void onSpinEnd(SpinLayout spinLayout, TestResult testResult);
+        void onSpinEnd(int betPerLine, int linesBetOnCount, SpinLayout spinLayout, TestResult testResult);
     }
 }
