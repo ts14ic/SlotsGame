@@ -1,4 +1,4 @@
-package md.ts14ic.slotsgame.slots.local;
+package md.ts14ic.slotsgame.local;
 
 import md.ts14ic.slotsgame.slots.*;
 

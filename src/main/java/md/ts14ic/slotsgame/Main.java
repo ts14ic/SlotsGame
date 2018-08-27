@@ -1,7 +1,7 @@
 package md.ts14ic.slotsgame;
 
+import md.ts14ic.slotsgame.local.LocalSlotsGame;
 import md.ts14ic.slotsgame.slots.SlotsGame;
-import md.ts14ic.slotsgame.slots.local.LocalSlotsGame;
 
 public class Main {
     public static void main(String[] args) {
