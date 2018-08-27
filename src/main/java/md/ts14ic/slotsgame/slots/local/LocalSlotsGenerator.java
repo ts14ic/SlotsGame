@@ -11,7 +11,7 @@ public class LocalSlotsGenerator implements SpinResult.Generator {
         return createRandomSlot();
     }
 
-    public static Slot createRandomSlot() {
+    private static Slot createRandomSlot() {
         return LocalSlots.SLOTS[RANDOM.nextInt(LocalSlots.SLOTS.length)];
     }
 
