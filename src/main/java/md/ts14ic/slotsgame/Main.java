@@ -9,11 +9,6 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Main app = new Main();
-        app.execute();
-    }
-
-    private void execute() {
         SlotsGame slotsGame = new LocalSlotsGame(new SlotsGame.Listener() {
             @Override
             public void onGenerated(SpinResult generatedCellSet) {
