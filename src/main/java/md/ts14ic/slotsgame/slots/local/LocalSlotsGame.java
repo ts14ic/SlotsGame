@@ -8,8 +8,8 @@ import md.ts14ic.slotsgame.slots.SlotsGame;
 import java.util.*;
 
 public class LocalSlotsGame implements SlotsGame {
-    public static final int ROWS_COUNT = 3;
-    public static final int COLUMNS_COUNT = 5;
+    private static final int ROWS_COUNT = 3;
+    private static final int COLUMNS_COUNT = 5;
     private static final Map<Rule, Integer> mPayouts = new HashMap<>();
     private static Rule sDummyRule = new Rule(new Slot(0), 0);
 
