@@ -11,8 +11,8 @@ public class Main {
     public static void main(String[] args) {
         SlotsGame slotsGame = new LocalSlotsGame(new SlotsGame.Listener() {
             @Override
-            public void onGenerated(SpinResult generatedCellSet) {
-                System.out.println(generatedCellSet);
+            public void onGenerated(SpinResult spinResult) {
+                System.out.println(spinResult);
             }
 
             @Override
