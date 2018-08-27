@@ -3,6 +3,7 @@ package md.ts14ic.slotsgame.slots.local;
 import md.ts14ic.slotsgame.slots.FoundLine;
 import md.ts14ic.slotsgame.slots.SlotsGame;
 import md.ts14ic.slotsgame.slots.SpinResult;
+import md.ts14ic.slotsgame.slots.SpinResultTester;
 
 import java.util.List;
 
@@ -11,12 +12,12 @@ import static java.util.Objects.requireNonNull;
 public class LocalSlotsGame implements SlotsGame {
     private static final int ROW_COUNT = 3;
     private static final int COLUMN_COUNT = 5;
-    private final LocalSpinResultTester spinResultTester;
+    private final SpinResultTester spinResultTester;
     private final SlotsGame.Listener listener;
 
-    public LocalSlotsGame(SlotsGame.Listener listener, LocalSpinResultTester spinResultTester) {
+    public LocalSlotsGame(SlotsGame.Listener listener, SpinResultTester spinResultTester) {
         this.listener = requireNonNull(listener);
-        this.spinResultTester = spinResultTester;
+        this.spinResultTester = requireNonNull(spinResultTester);
     }
 
     @Override

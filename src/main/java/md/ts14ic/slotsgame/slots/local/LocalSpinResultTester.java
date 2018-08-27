@@ -1,15 +1,12 @@
 package md.ts14ic.slotsgame.slots.local;
 
-import md.ts14ic.slotsgame.slots.FoundLine;
-import md.ts14ic.slotsgame.slots.Payline;
-import md.ts14ic.slotsgame.slots.Slot;
-import md.ts14ic.slotsgame.slots.SpinResult;
+import md.ts14ic.slotsgame.slots.*;
 
 import java.util.*;
 
 import static java.util.Objects.requireNonNull;
 
-public class LocalSpinResultTester {
+public class LocalSpinResultTester implements SpinResultTester {
     private static final Map<Rule, Integer> RULE_TO_PAYOUT = initRuleToPayout();
 
     private static Map<Rule, Integer> initRuleToPayout() {
@@ -34,7 +31,8 @@ public class LocalSpinResultTester {
         return Collections.unmodifiableMap(map);
     }
 
-    List<FoundLine> test(SpinResult result, int betPerLine, int betOnLinesCount) {
+    @Override
+    public List<FoundLine> test(SpinResult result, int betPerLine, int betOnLinesCount) {
         betOnLinesCount = clamp(betOnLinesCount, 1, LocalPaylines.LINES.length);
 
         List<FoundLine> foundLines = new ArrayList<>();
