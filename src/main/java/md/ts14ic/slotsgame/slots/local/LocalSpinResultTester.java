@@ -47,12 +47,12 @@ public class LocalSpinResultTester implements SpinResultTester {
         return Math.min(Math.max(value, min), max);
     }
 
-    private Optional<FoundLine> testPayline(Payline payline, List<List<Slot>> slots, int bet) {
-        Slot startingSlot = slots.get(payline.cell(0)).get(0);
+    private Optional<FoundLine> testPayline(RuleLine ruleLine, List<List<Slot>> slots, int bet) {
+        Slot startingSlot = slots.get(ruleLine.cell(0)).get(0);
         int length = 1;
 
-        for (int i = 1; i < payline.length(); ++i) {
-            if (slots.get(payline.cell(i)).get(i) == startingSlot) {
+        for (int i = 1; i < ruleLine.length(); ++i) {
+            if (slots.get(ruleLine.cell(i)).get(i) == startingSlot) {
                 ++length;
             } else {
                 break;
@@ -63,7 +63,7 @@ public class LocalSpinResultTester implements SpinResultTester {
 
         if (RULE_TO_PAYOUT.containsKey(rule)) {
             int payout = RULE_TO_PAYOUT.get(rule) * bet;
-            return Optional.of(new FoundLine(payline, length, payout));
+            return Optional.of(new FoundLine(ruleLine, length, payout));
         }
         return Optional.empty();
     }

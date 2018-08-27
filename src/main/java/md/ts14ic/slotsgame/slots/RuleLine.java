@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Payline {
+public class RuleLine {
     private final List<Integer> cells;
 
-    public Payline(int... cells) {
+    public RuleLine(int... cells) {
         this.cells = toList(cells);
     }
 
