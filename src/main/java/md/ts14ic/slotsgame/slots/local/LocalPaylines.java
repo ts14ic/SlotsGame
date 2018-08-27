@@ -2,8 +2,10 @@ package md.ts14ic.slotsgame.slots.local;
 
 import md.ts14ic.slotsgame.slots.Payline;
 
-public abstract class LocalPaylines {
-    public static final Payline[] LINES = new Payline[] {
+class LocalPaylines {
+    private LocalPaylines() {}
+
+    static final Payline[] LINES = new Payline[]{
             new Payline(new int[]{1, 0, 1, 2, 1}),
             new Payline(new int[]{1, 1, 1, 1, 1}),
             new Payline(new int[]{0, 0, 0, 0, 0}),

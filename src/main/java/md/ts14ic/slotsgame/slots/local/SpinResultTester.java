@@ -6,6 +6,8 @@ import md.ts14ic.slotsgame.slots.SpinResult;
 
 import java.util.*;
 
+import static java.util.Objects.requireNonNull;
+
 class SpinResultTester {
     private static final Map<Rule, Integer> RULE_TO_PAYOUT = initRuleToPayout();
     private final LocalSlotsGame.Listener listener;
@@ -90,5 +92,29 @@ class SpinResultTester {
 
     int getTotalPayout() {
         return totalPayout;
+    }
+
+    public static class Rule {
+        private final Slot type;
+        private final int length;
+
+        Rule(Slot type, int length) {
+            this.type = requireNonNull(type);
+            this.length = length;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Rule rule = (Rule) o;
+            return length == rule.length &&
+                    type == rule.type;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(type, length);
+        }
     }
 }
