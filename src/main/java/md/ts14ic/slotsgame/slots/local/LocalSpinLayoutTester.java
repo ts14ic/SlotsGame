@@ -85,16 +85,7 @@ class LocalSpinLayoutTester implements SpinLayoutTester {
 
     private Optional<FoundLine> testPayline(RuleLine ruleLine, List<List<Slot>> slots, int bet) {
         Slot startingSlot = slots.get(ruleLine.cell(0)).get(0);
-        int length = 1;
-
-        for (int i = 1; i < ruleLine.length(); ++i) {
-            if (slots.get(ruleLine.cell(i)).get(i) == startingSlot) {
-                ++length;
-            } else {
-                break;
-            }
-        }
-
+        int length = calculatePaylineLength(ruleLine, startingSlot, slots);
         Rule rule = new Rule(startingSlot, length);
 
         if (RULE_TO_PAYOUT.containsKey(rule)) {
@@ -102,6 +93,18 @@ class LocalSpinLayoutTester implements SpinLayoutTester {
             return Optional.of(new FoundLine(ruleLine, length, payout));
         }
         return Optional.empty();
+    }
+
+    private int calculatePaylineLength(RuleLine ruleLine, Slot startingSlot, List<List<Slot>> slots) {
+        int length = 1;
+        for (int i = 1; i < ruleLine.length(); ++i) {
+            if (slots.get(ruleLine.cell(i)).get(i) == startingSlot) {
+                ++length;
+            } else {
+                break;
+            }
+        }
+        return length;
     }
 
     private static class Rule {
