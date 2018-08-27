@@ -4,7 +4,7 @@ import md.ts14ic.slotsgame.slots.FoundLine;
 import md.ts14ic.slotsgame.slots.SlotsGame;
 import md.ts14ic.slotsgame.slots.SlotsGameImpl;
 import md.ts14ic.slotsgame.slots.SpinResult;
-import md.ts14ic.slotsgame.slots.local.LocalSlots;
+import md.ts14ic.slotsgame.slots.local.LocalSlotsGenerator;
 import md.ts14ic.slotsgame.slots.local.LocalSpinResultTester;
 
 import java.util.List;
@@ -14,7 +14,7 @@ public class Main {
         SlotsGame slotsGame = new SlotsGameImpl(
                 3,
                 5,
-                (rowIndex, columnIndex) -> LocalSlots.getRandomSlot(),
+                new LocalSlotsGenerator(),
                 new LocalSpinResultTester(),
                 new SlotsGame.Listener() {
                     @Override
