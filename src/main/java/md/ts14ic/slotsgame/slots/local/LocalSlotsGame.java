@@ -45,19 +45,25 @@ public class LocalSlotsGame implements SlotsGame {
     @Override
     public void spin(int bet, int lines) {
         mTotalPayout = 0;
-        SpinResult spinResult = new SpinResult(ROWS_COUNT, COLUMNS_COUNT);
 
-        for (int r = 0; r < spinResult.getRows(); ++r) {
-            for (int c = 0; c < spinResult.getColumns(); ++c) {
-                spinResult.setCell(r, c, LocalSlots.getRandomSlot());
-            }
-        }
-
+        SpinResult spinResult = randomSpinResult();
         mListener.onGenerated(spinResult);
 
         testSpinResult(spinResult, bet, lines);
 
         mListener.onTestEnd(mPaylines, mTotalPayout);
+    }
+
+    private SpinResult randomSpinResult() {
+        List<List<Slot>> slots = new ArrayList<>();
+        for (int rowIndex = 0; rowIndex < ROWS_COUNT; ++rowIndex) {
+            List<Slot> row = new ArrayList<>();
+            for (int columnIndex = 0; columnIndex < COLUMNS_COUNT; ++columnIndex) {
+                row.add(LocalSlots.getRandomSlot());
+            }
+            slots.add(row);
+        }
+        return new SpinResult(slots);
     }
 
     private void testSpinResult(SpinResult result, int bet, int lines) {

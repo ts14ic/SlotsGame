@@ -14,14 +14,10 @@ public class Main {
     }
 
     private void execute() {
-        final SpinResult spinResult = new SpinResult();
-
         SlotsGame slotsGame = new LocalSlotsGame(new SlotsGame.Listener() {
             @Override
             public void onGenerated(SpinResult generatedCellSet) {
-                spinResult.copyFrom(generatedCellSet);
-
-                System.out.println(spinResult);
+                System.out.println(generatedCellSet);
             }
 
             @Override
