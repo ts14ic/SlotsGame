@@ -7,33 +7,10 @@ import md.ts14ic.slotsgame.slots.SpinResult;
 import java.util.*;
 
 class SpinResultTester {
+    private static final Map<Rule, Integer> RULE_TO_PAYOUT = initRuleToPayout();
     private final LocalSlotsGame.Listener listener;
     private final List<Payline> paylines;
-    private int mTotalPayout;
-
-    private static final Map<Rule, Integer> PAYOUTS;
-
-    static {
-        Map<Rule, Integer> payouts = new HashMap<>();
-        payouts.put(new Rule(LocalSlots.SLOTS[0], 2), 40);
-        payouts.put(new Rule(LocalSlots.SLOTS[0], 3), 75);
-        payouts.put(new Rule(LocalSlots.SLOTS[0], 4), 200);
-        payouts.put(new Rule(LocalSlots.SLOTS[0], 5), 750);
-
-        payouts.put(new Rule(LocalSlots.SLOTS[1], 2), 3);
-        payouts.put(new Rule(LocalSlots.SLOTS[1], 3), 10);
-        payouts.put(new Rule(LocalSlots.SLOTS[1], 4), 30);
-        payouts.put(new Rule(LocalSlots.SLOTS[1], 5), 40);
-
-        payouts.put(new Rule(LocalSlots.SLOTS[2], 3), 10);
-        payouts.put(new Rule(LocalSlots.SLOTS[2], 4), 10);
-        payouts.put(new Rule(LocalSlots.SLOTS[2], 5), 100);
-
-        payouts.put(new Rule(LocalSlots.SLOTS[3], 3), 30);
-        payouts.put(new Rule(LocalSlots.SLOTS[3], 4), 100);
-        payouts.put(new Rule(LocalSlots.SLOTS[3], 5), 500);
-        PAYOUTS = Collections.unmodifiableMap(payouts);
-    }
+    private int totalPayout;
 
     SpinResultTester(
             SpinResult result,
@@ -74,12 +51,34 @@ class SpinResultTester {
 
         Rule rule = new Rule(startingSlot, length);
 
-        if (PAYOUTS.containsKey(rule)) {
-            int payout = PAYOUTS.get(rule) * bet;
-            mTotalPayout += payout;
+        if (RULE_TO_PAYOUT.containsKey(rule)) {
+            int payout = RULE_TO_PAYOUT.get(rule) * bet;
+            totalPayout += payout;
             paylines.add(payline);
             listener.onLineFound(payline, length, payout);
         }
+    }
+
+    private static Map<Rule, Integer> initRuleToPayout() {
+        Map<Rule, Integer> map = new HashMap<>();
+        map.put(new Rule(LocalSlots.SLOTS[0], 2), 40);
+        map.put(new Rule(LocalSlots.SLOTS[0], 3), 75);
+        map.put(new Rule(LocalSlots.SLOTS[0], 4), 200);
+        map.put(new Rule(LocalSlots.SLOTS[0], 5), 750);
+
+        map.put(new Rule(LocalSlots.SLOTS[1], 2), 3);
+        map.put(new Rule(LocalSlots.SLOTS[1], 3), 10);
+        map.put(new Rule(LocalSlots.SLOTS[1], 4), 30);
+        map.put(new Rule(LocalSlots.SLOTS[1], 5), 40);
+
+        map.put(new Rule(LocalSlots.SLOTS[2], 3), 10);
+        map.put(new Rule(LocalSlots.SLOTS[2], 4), 10);
+        map.put(new Rule(LocalSlots.SLOTS[2], 5), 100);
+
+        map.put(new Rule(LocalSlots.SLOTS[3], 3), 30);
+        map.put(new Rule(LocalSlots.SLOTS[3], 4), 100);
+        map.put(new Rule(LocalSlots.SLOTS[3], 5), 500);
+        return Collections.unmodifiableMap(map);
     }
 
     List<Payline> getPaylines() {
@@ -87,6 +86,6 @@ class SpinResultTester {
     }
 
     int getTotalPayout() {
-        return mTotalPayout;
+        return totalPayout;
     }
 }
