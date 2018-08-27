@@ -14,22 +14,25 @@ public class LocalSlotsGame implements SlotsGame {
     private final int columnCount;
     private final SpinResultTester spinResultTester;
     private final SlotsGame.Listener listener;
+    private final SpinResult.Generator generator;
 
     public LocalSlotsGame(
             int rowCount,
             int columnCount,
-            Listener listener,
-            SpinResultTester spinResultTester
+            SpinResult.Generator generator,
+            SpinResultTester spinResultTester,
+            Listener listener
     ) {
         this.rowCount = rowCount;
         this.columnCount = columnCount;
-        this.listener = requireNonNull(listener);
+        this.generator = requireNonNull(generator);
         this.spinResultTester = requireNonNull(spinResultTester);
+        this.listener = requireNonNull(listener);
     }
 
     @Override
     public void spin(int betPerLine, int linesBetOnCount) {
-        SpinResult spinResult = randomSpinResult();
+        SpinResult spinResult = SpinResult.fromGenerator(rowCount, columnCount, generator);
 
         listener.onGenerated(spinResult);
 
@@ -47,13 +50,5 @@ public class LocalSlotsGame implements SlotsGame {
             totalPayout += line.getPayout();
         }
         return totalPayout;
-    }
-
-    private SpinResult randomSpinResult() {
-        return SpinResult.fromGenerator(
-                rowCount,
-                columnCount,
-                (rowIndex, columnIndex) -> LocalSlots.getRandomSlot()
-        );
     }
 }
