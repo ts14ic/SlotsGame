@@ -1,13 +1,11 @@
 package md.ts14ic.slotsgame;
 
 import md.ts14ic.slotsgame.slots.SlotsGame;
-import md.ts14ic.slotsgame.slots.SlotsGameImpl;
-import md.ts14ic.slotsgame.slots.local.LocalSetting;
+import md.ts14ic.slotsgame.slots.local.LocalSlotsGame;
 
 public class Main {
     public static void main(String[] args) {
-        SlotsGame slotsGame = new SlotsGameImpl(
-                new LocalSetting(),
+        SlotsGame slotsGame = new LocalSlotsGame(
                 spinResult -> {
                     System.out.println(spinResult.getSpinLayout());
                     System.out.println(spinResult.getFoundLines());

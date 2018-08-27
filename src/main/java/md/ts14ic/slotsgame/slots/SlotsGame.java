@@ -6,8 +6,4 @@ public interface SlotsGame {
     interface Listener {
         void onSpinEnd(SpinResult spinResult);
     }
-
-    interface Setting {
-        SpinResult spin(int betPerLine, int linesBetOnCount);
-    }
 }
