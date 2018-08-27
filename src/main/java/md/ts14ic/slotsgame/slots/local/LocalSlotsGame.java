@@ -12,10 +12,6 @@ public class LocalSlotsGame implements SlotsGame {
     private static final int COLUMNS_COUNT = 5;
     private static final Map<Rule, Integer> PAYOUTS;
 
-    private List<Payline> mPaylines = new ArrayList<>();
-    private SlotsGame.Listener mListener;
-    private int mTotalPayout = 0;
-
     static {
         Map<Rule, Integer> payouts = new HashMap<>();
         payouts.put(new Rule(LocalSlots.SLOTS[0], 2), 40);
@@ -37,6 +33,10 @@ public class LocalSlotsGame implements SlotsGame {
         payouts.put(new Rule(LocalSlots.SLOTS[3], 5), 500);
         PAYOUTS = Collections.unmodifiableMap(payouts);
     }
+
+    private List<Payline> mPaylines = new ArrayList<>();
+    private SlotsGame.Listener mListener;
+    private int mTotalPayout = 0;
 
     public LocalSlotsGame(SlotsGame.Listener listener) {
         mListener = listener;
