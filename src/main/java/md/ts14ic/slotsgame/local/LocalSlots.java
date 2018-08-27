@@ -2,6 +2,8 @@ package md.ts14ic.slotsgame.local;
 
 import md.ts14ic.slotsgame.slots.Slot;
 
+import java.util.Random;
+
 class LocalSlots {
     static final Slot[] SLOTS = new Slot[]{
             new Slot(0),
@@ -12,6 +14,12 @@ class LocalSlots {
             new Slot(5),
             new Slot(6)
     };
+    private static final Random RANDOM = new Random();
 
-    private LocalSlots() {}
+    private LocalSlots() {
+    }
+
+    static Slot createRandomSlot() {
+        return SLOTS[RANDOM.nextInt(SLOTS.length)];
+    }
 }

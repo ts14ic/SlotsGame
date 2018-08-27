@@ -2,6 +2,8 @@ package md.ts14ic.slotsgame.local;
 
 import md.ts14ic.slotsgame.slots.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static java.util.Objects.requireNonNull;
@@ -9,7 +11,6 @@ import static java.util.Objects.requireNonNull;
 public class LocalSlotsGame implements SlotsGame {
     private static final int ROW_COUNT = 3;
     private static final int COLUMN_COUNT = 5;
-    private final LocalSlotsGenerator slotsGenerator = new LocalSlotsGenerator();
     private final LocalSpinLayoutTester layoutTester = new LocalSpinLayoutTester();
     private final Listener listener;
 
@@ -26,14 +27,18 @@ public class LocalSlotsGame implements SlotsGame {
     }
 
     private SpinLayout generateSpinLayout() {
-        return SpinLayout.fromGenerator(ROW_COUNT, COLUMN_COUNT, this::generateSlot);
+        List<List<Slot>> slots = new ArrayList<>();
+        for (int rowIndex = 0; rowIndex < ROW_COUNT; ++rowIndex) {
+            List<Slot> row = new ArrayList<>();
+            for (int columnIndex = 0; columnIndex < COLUMN_COUNT; ++columnIndex) {
+                row.add(LocalSlots.createRandomSlot());
+            }
+            slots.add(Collections.unmodifiableList(row));
+        }
+        return new SpinLayout(slots);
     }
 
     private List<FoundLine> testSpinLayout(SpinLayout result, int betPerLine, int betOnLinesCount) {
         return layoutTester.test(result, betPerLine, betOnLinesCount);
-    }
-
-    private Slot generateSlot(int rowIndex, int columnIndex) {
-        return slotsGenerator.generate(rowIndex, columnIndex);
     }
 }

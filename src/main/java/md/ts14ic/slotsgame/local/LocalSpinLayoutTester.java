@@ -1,12 +1,15 @@
 package md.ts14ic.slotsgame.local;
 
-import md.ts14ic.slotsgame.slots.*;
+import md.ts14ic.slotsgame.slots.FoundLine;
+import md.ts14ic.slotsgame.slots.RuleLine;
+import md.ts14ic.slotsgame.slots.Slot;
+import md.ts14ic.slotsgame.slots.SpinLayout;
 
 import java.util.*;
 
 import static java.util.Objects.requireNonNull;
 
-class LocalSpinLayoutTester implements SpinLayoutTester {
+class LocalSpinLayoutTester {
     private static final List<RuleLine> LINES = initRuleLines();
     private static final Map<Rule, Integer> RULE_TO_PAYOUT = initRuleToPayout();
 
@@ -67,13 +70,12 @@ class LocalSpinLayoutTester implements SpinLayoutTester {
         return Collections.unmodifiableMap(map);
     }
 
-    @Override
-    public List<FoundLine> test(SpinLayout result, int betPerLine, int betOnLinesCount) {
+    List<FoundLine> test(SpinLayout result, int betPerLine, int betOnLinesCount) {
         betOnLinesCount = clamp(betOnLinesCount, 1, LINES.size());
 
         List<FoundLine> foundLines = new ArrayList<>();
         for (int i = 0; i < betOnLinesCount; ++i) {
-            testPayline(LINES.get(i), result.getCells(), betPerLine)
+            testPayline(LINES.get(i), result.getSlots(), betPerLine)
                     .map(foundLines::add);
         }
         return Collections.unmodifiableList(foundLines);
