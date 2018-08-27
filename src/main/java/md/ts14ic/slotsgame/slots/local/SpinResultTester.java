@@ -9,31 +9,35 @@ import java.util.*;
 class SpinResultTester {
     private static final Map<Rule, Integer> RULE_TO_PAYOUT = initRuleToPayout();
     private final LocalSlotsGame.Listener listener;
+    private final int betPerLine;
+    private final int betOnLinesCount;
+
     private final List<Payline> paylines;
     private int totalPayout;
 
     SpinResultTester(
-            SpinResult result,
-            int bet,
-            int lines,
+            SpinResult spinResult,
+            int betPerLine,
+            int betOnLinesCount,
             LocalSlotsGame.Listener listener
     ) {
         this.listener = listener;
+        this.betPerLine = betPerLine;
+        this.betOnLinesCount = clamp(betOnLinesCount, 1, LocalPaylines.LINES.length);
         this.paylines = new ArrayList<>();
 
-        test(result, bet, lines);
-    }
-
-    private void test(SpinResult result, int bet, int lines) {
-        paylines.clear();
-        lines = clamp(lines, 1, LocalPaylines.LINES.length);
-        for (int i = 0; i < lines; ++i) {
-            testPayline(LocalPaylines.LINES[i], result.getCells(), bet);
-        }
+        test(spinResult);
     }
 
     private static int clamp(int value, int min, int max) {
         return Math.min(Math.max(value, min), max);
+    }
+
+    private void test(SpinResult result) {
+        paylines.clear();
+        for (int i = 0; i < betOnLinesCount; ++i) {
+            testPayline(LocalPaylines.LINES[i], result.getCells(), betPerLine);
+        }
     }
 
     private void testPayline(Payline payline, List<List<Slot>> slots, int bet) {
