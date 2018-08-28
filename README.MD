@@ -1,7 +1,7 @@
 Slots Game
 ==========
 
-A small prototype for a simple slots machine game
+A small business layer for a simple slots machine game
 
 The slots package has different data classes and a SlotsGame interface.    
 The default implementation is a LocalSlotsGame, that can work on a local machine,  
