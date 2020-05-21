@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class RuleLine {
+class RuleLine {
     private final List<Integer> cells;
 
     public RuleLine(int... cells) {

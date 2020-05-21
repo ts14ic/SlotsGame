@@ -1,18 +1,25 @@
-package md.ts14ic.slotsgame.local;
+package md.ts14ic.slotsgame.slots;
 
-import md.ts14ic.slotsgame.slots.FoundLine;
-import md.ts14ic.slotsgame.slots.RuleLine;
-import md.ts14ic.slotsgame.slots.Slot;
-import md.ts14ic.slotsgame.slots.SpinLayout;
+import md.ts14ic.slotsgame.internal.NumberUtils;
 
 import java.util.*;
 
 import static java.util.Objects.requireNonNull;
 
-/** Tests winning combinations in a layout that has 3 rows and 5 columns. */
-class SpinTester3r5c {
+public class SlotsGame {
+    private static final Random RANDOM = new Random();
+    private static final int ROW_COUNT = 3;
+    private static final int COLUMN_COUNT = 5;
+    private static final Slot[] SLOTS = initSlots();
     private static final List<RuleLine> LINES = initRuleLines();
     private static final Map<Rule, Integer> RULE_TO_PAYOUT = initRuleToPayout();
+
+    public SlotsGame() {
+    }
+
+    private static Slot[] initSlots() {
+        return new Slot[]{new Slot(0), new Slot(1), new Slot(2), new Slot(3), new Slot(4), new Slot(5), new Slot(6)};
+    }
 
     private static List<RuleLine> initRuleLines() {
         return Arrays.asList(
@@ -51,28 +58,51 @@ class SpinTester3r5c {
 
     private static Map<Rule, Integer> initRuleToPayout() {
         Map<Rule, Integer> map = new HashMap<>();
-        map.put(new Rule(Slots.SLOTS[0], 2), 40);
-        map.put(new Rule(Slots.SLOTS[0], 3), 75);
-        map.put(new Rule(Slots.SLOTS[0], 4), 200);
-        map.put(new Rule(Slots.SLOTS[0], 5), 750);
+        map.put(new Rule(SLOTS[0], 2), 40);
+        map.put(new Rule(SLOTS[0], 3), 75);
+        map.put(new Rule(SLOTS[0], 4), 200);
+        map.put(new Rule(SLOTS[0], 5), 750);
 
-        map.put(new Rule(Slots.SLOTS[1], 2), 3);
-        map.put(new Rule(Slots.SLOTS[1], 3), 10);
-        map.put(new Rule(Slots.SLOTS[1], 4), 30);
-        map.put(new Rule(Slots.SLOTS[1], 5), 40);
+        map.put(new Rule(SLOTS[1], 2), 3);
+        map.put(new Rule(SLOTS[1], 3), 10);
+        map.put(new Rule(SLOTS[1], 4), 30);
+        map.put(new Rule(SLOTS[1], 5), 40);
 
-        map.put(new Rule(Slots.SLOTS[2], 3), 10);
-        map.put(new Rule(Slots.SLOTS[2], 4), 10);
-        map.put(new Rule(Slots.SLOTS[2], 5), 100);
+        map.put(new Rule(SLOTS[2], 3), 10);
+        map.put(new Rule(SLOTS[2], 4), 10);
+        map.put(new Rule(SLOTS[2], 5), 100);
 
-        map.put(new Rule(Slots.SLOTS[3], 3), 30);
-        map.put(new Rule(Slots.SLOTS[3], 4), 100);
-        map.put(new Rule(Slots.SLOTS[3], 5), 500);
+        map.put(new Rule(SLOTS[3], 3), 30);
+        map.put(new Rule(SLOTS[3], 4), 100);
+        map.put(new Rule(SLOTS[3], 5), 500);
         return Collections.unmodifiableMap(map);
     }
 
-    List<FoundLine> test(SpinLayout result, int betPerLine, int betOnLinesCount) {
-        betOnLinesCount = clamp(betOnLinesCount, 1, LINES.size());
+    public SpinResult spin(int betPerLine, int linesBetOnCount) {
+        SpinLayout spinLayout = generateSpinLayout();
+        List<FoundLine> foundLines = testSpinLayout(spinLayout, betPerLine, linesBetOnCount);
+
+        return new SpinResult(spinLayout, foundLines, betPerLine, linesBetOnCount);
+    }
+
+    private SpinLayout generateSpinLayout() {
+        List<List<Slot>> slots = new ArrayList<>();
+        for (int rowIndex = 0; rowIndex < ROW_COUNT; ++rowIndex) {
+            List<Slot> row = new ArrayList<>();
+            for (int columnIndex = 0; columnIndex < COLUMN_COUNT; ++columnIndex) {
+                row.add(createRandomSlot());
+            }
+            slots.add(Collections.unmodifiableList(row));
+        }
+        return new SpinLayout(slots);
+    }
+
+    static Slot createRandomSlot() {
+        return SLOTS[RANDOM.nextInt(SLOTS.length)];
+    }
+
+    List<FoundLine> testSpinLayout(SpinLayout result, int betPerLine, int betOnLinesCount) {
+        betOnLinesCount = NumberUtils.clamp(betOnLinesCount, 1, LINES.size());
 
         List<FoundLine> foundLines = new ArrayList<>();
         for (int i = 0; i < betOnLinesCount; ++i) {
@@ -80,10 +110,6 @@ class SpinTester3r5c {
                     .map(foundLines::add);
         }
         return Collections.unmodifiableList(foundLines);
-    }
-
-    private static int clamp(int value, int min, int max) {
-        return Math.min(Math.max(value, min), max);
     }
 
     private Optional<FoundLine> testPayline(RuleLine ruleLine, List<List<Slot>> slots, int bet) {

@@ -1,14 +1,14 @@
 package md.ts14ic.slotsgame.slots;
 
 public class Slot {
-    private int mId;
+    private int type;
 
-    public Slot(int id) {
-        mId = id;
+    public Slot(int type) {
+        this.type = type;
     }
 
     @Override
     public String toString() {
-        return "[" + mId + "]";
+        return "[" + type + "]";
     }
 }
