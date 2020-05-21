@@ -29,7 +29,7 @@ public class SpinResult {
     private int calculateTotalPayout(List<FoundLine> foundLines) {
         int totalPayout = 0;
         for (FoundLine line : foundLines) {
-            totalPayout += line.getPayout();
+            totalPayout += line.getReward();
         }
         return totalPayout;
     }

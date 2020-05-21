@@ -3,16 +3,16 @@ package md.ts14ic.slotsgame.slots;
 public class FoundLine {
     private final RuleLine ruleLine;
     private final int length;
-    private final int payout;
+    private final int reward;
 
-    public FoundLine(RuleLine ruleLine, int length, int payout) {
+    public FoundLine(RuleLine ruleLine, int length, int reward) {
         this.ruleLine = ruleLine;
         this.length = length;
-        this.payout = payout;
+        this.reward = reward;
     }
 
-    int getPayout() {
-        return payout;
+    int getReward() {
+        return reward;
     }
 
     /**
@@ -38,7 +38,7 @@ public class FoundLine {
         return builder.append("|, length: ")
                 .append(length)
                 .append(", payout: ")
-                .append(payout)
+                .append(reward)
                 .append(" ]")
                 .toString();
     }

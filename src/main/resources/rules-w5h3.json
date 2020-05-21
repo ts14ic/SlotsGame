@@ -1,0 +1,128 @@
+{
+  "layout": {
+    "width": 5,
+    "height": 3,
+    "lines": [
+      [1, 0, 1, 2, 1],
+      [1, 1, 1, 1, 1],
+      [0, 0, 0, 0, 0],
+      [2, 2, 2, 2, 2],
+      [0, 1, 2, 1, 0],
+      [2, 1, 0, 1, 2],
+      [1, 0, 0, 0, 1],
+      [1, 2, 2, 2, 1],
+      [0, 0, 1, 2, 2],
+      [2, 2, 1, 0, 0],
+      [0, 2, 2, 0, 1],
+      [0, 1, 1, 1, 0],
+      [2, 1, 1, 1, 2],
+      [0, 1, 0, 1, 0],
+      [2, 1, 2, 1, 2],
+      [1, 1, 0, 1, 1],
+      [1, 1, 2, 1, 1],
+      [0, 0, 2, 0, 0],
+      [2, 2, 0, 2, 2],
+      [0, 2, 2, 2, 0],
+      [2, 0, 0, 0, 2],
+      [1, 2, 0, 2, 1],
+      [1, 0, 2, 0, 1],
+      [0, 2, 0, 2, 0],
+      [2, 0, 2, 0, 2],
+      [2, 0, 1, 2, 0],
+      [0, 2, 1, 0, 2],
+      [0, 2, 1, 2, 0],
+      [2, 0, 1, 0, 2],
+      [2, 1, 0, 0, 1]
+    ]
+  },
+  "slots": [
+    {
+      "name": "apple",
+      "combos": [
+        {
+          "length": 2,
+          "betMultiplier": 40
+        },
+        {
+          "length": 3,
+          "betMultiplier": 75
+        },
+        {
+          "length": 4,
+          "betMultiplier": 200
+        },
+        {
+          "length": 5,
+          "betMultiplier": 750
+        }
+      ]
+    },
+    {
+      "name": "banana",
+      "combos": [
+        {
+          "length": 2,
+          "betMultiplier": 3
+        },
+        {
+          "length": 3,
+          "betMultiplier": 10
+        },
+        {
+          "length": 4,
+          "betMultiplier": 30
+        },
+        {
+          "length": 5,
+          "betMultiplier": 40
+        }
+      ]
+    },
+    {
+      "name": "cranberry",
+      "combos": [
+        {
+          "length": 3,
+          "betMultiplier": 10
+        },
+        {
+          "length": 4,
+          "betMultiplier": 10
+        },
+        {
+          "length": 5,
+          "betMultiplier": 100
+        }
+      ]
+    },
+    {
+      "name": "dragon_fruit",
+      "combos": [
+        {
+          "length": 3,
+          "betMultiplier": 30
+        },
+        {
+          "length": 4,
+          "betMultiplier": 100
+        },
+        {
+          "length": 5,
+          "betMultiplier": 500
+        }
+      ]
+    },
+    {
+      "name": "kiwi",
+      "combos": []
+    },
+    {
+      "name": "lemon",
+      "combos": []
+    },
+    {
+      "name": "plum",
+      "combos": []
+    }
+  ]
+}

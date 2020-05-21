@@ -1,11 +1,16 @@
 package md.ts14ic.slotsgame;
 
-import md.ts14ic.slotsgame.slots.SlotsGame;
-import md.ts14ic.slotsgame.slots.SpinResult;
+import md.ts14ic.slotsgame.slots.*;
+
+import java.io.InputStream;
 
 public class Main {
-    public static void main(String[] args) {
-        SlotsGame slotsGame = new SlotsGame();
+    public static void main(String[] args) throws Exception {
+        InputStream rulesStream = Thread.currentThread().getContextClassLoader()
+                .getResourceAsStream("rules-w5h3.json");
+        Rules rules = new RulesParser().parse(rulesStream);
+
+        SlotsGame slotsGame = new FairSlotsGame(rules);
 
         SpinResult spinResult = slotsGame.spin(100, 30);
 
