@@ -10,8 +10,17 @@ public class Main {
                 .getResourceAsStream("rules-w5h3.json");
         Rules rules = new RulesParser().parse(rulesStream);
 
-        SlotsGame slotsGame = new FairSlotsGame(rules);
+//        doASpin(new FairSlotsGame(rules));
+        doASpin(UnfairSlotsGame.builder()
+                .rules(rules)
+                .currentScore(1000)
+                .maxScore(3000)
+                .maxChanceToRejectSpin(0.6f)
+                .maxSpinsRejected(2)
+                .build());
+    }
 
+    private static void doASpin(SlotsGame slotsGame) {
         SpinResult spinResult = slotsGame.spin(100, 30);
 
         System.out.println("Spinned: " + spinResult.getSpinLayout());
@@ -21,7 +30,7 @@ public class Main {
                 spinResult.getBetPerLine(),
                 spinResult.getLinesBetOnCount(),
                 spinResult.getTotalBet(),
-                spinResult.getTotalPayout()
+                spinResult.getTotalReward()
         ));
     }
 }

@@ -10,7 +10,7 @@ public class SpinResult {
     private final int betPerLine;
     private final int linesBetOnCount;
     private final int totalBet;
-    private final int totalPayout;
+    private final int totalReward;
 
     public SpinResult(
             SpinLayout spinLayout,
@@ -23,7 +23,7 @@ public class SpinResult {
         this.betPerLine = betPerLine;
         this.linesBetOnCount = linesBetOnCount;
         this.totalBet = betPerLine * linesBetOnCount;
-        this.totalPayout = calculateTotalPayout(foundLines);
+        this.totalReward = calculateTotalPayout(foundLines);
     }
 
     private int calculateTotalPayout(List<FoundLine> foundLines) {
@@ -54,7 +54,7 @@ public class SpinResult {
         return totalBet;
     }
 
-    public int getTotalPayout() {
-        return totalPayout;
+    public int getTotalReward() {
+        return totalReward;
     }
 }
