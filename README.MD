@@ -1,9 +1,5 @@
 Slots Game
 ==========
 
-A small business layer for a simple slots machine game
-
-The slots package has different data classes and a SlotsGame interface.    
-The default implementation is a LocalSlotsGame, that can work on a local machine,  
-but the interface can be overridden to have a remote based game (hence using a Listener and not a return type)  
- 
+An ancient attempt to make the business layer for a slots game.
+Pretty fair, considering it has no heuristics that prevent constant winning.

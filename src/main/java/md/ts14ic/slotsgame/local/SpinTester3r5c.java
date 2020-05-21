@@ -9,7 +9,8 @@ import java.util.*;
 
 import static java.util.Objects.requireNonNull;
 
-class SpinLayoutTester {
+/** Tests winning combinations in a layout that has 3 rows and 5 columns. */
+class SpinTester3r5c {
     private static final List<RuleLine> LINES = initRuleLines();
     private static final Map<Rule, Integer> RULE_TO_PAYOUT = initRuleToPayout();
 
